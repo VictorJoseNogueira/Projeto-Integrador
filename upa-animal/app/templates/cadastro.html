@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<form action="" method="POST"></form>
+    <div class="container-login-form">
+        <h1 class="h3 mb-3 font-weight-normal">Cadastre um novo usuario</h1>
+    <div class="form-signin">
+        {{cadastro.nome(class="form-control", placeholder="nome")}}
+        {{cadastro.email(class="form-control", placeholder="email")}}
+        {{cadastro.senha(class="form-control", placeholder="senha")}}
+
+
+    </div>
+</div>
+</div>
+{% endblock content %}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="container-global">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-secondary btn-color">ADD</button>
+            <button type="button" class="btn btn-secondary btn-color">EDIT</button>
+            <button type="button" class="btn btn-secondary btn-color">DEL</button>
+          </div>
+
+          <div class="table-container">
+            <table class="table-color">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>Tel</th>
+                        <th>Endereço</th>
+                      </tr>
+                      <tbody>
+                        {% for tutor in tutores %}
+                        <tr>
+                            <td>{{ tutor.id }}</td>
+                            <td>{{ tutor.nome }}</td>
+                            <td>{{ tutor.cpf }}</td>
+                            <td>{{ tutor.tel }}</td>
+                            <td>{{ tutor.endereco }}</td>                      
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+       
+
+    </div>
+
+
+
+{% endblock content %}

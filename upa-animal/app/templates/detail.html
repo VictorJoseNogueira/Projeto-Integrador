@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}- animais{% endblock title %}
+{% block content %}
+
+<div class="container-global">
+
+
+    <div class="table-container">
+        <table class="table-color">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nome</th>
+                    <th>Peso</th>
+                    <th>Sexo</th>
+                    <th>Idade</th>
+                    <th>Espécie</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for animal in animals %}
+                <tr>
+                    <td>{{ animal.animal_id }}</td>
+                    <td>{{ animal.nome }}</td>
+                    <td>{{ animal.peso_aproximado }}</td>
+                    <td>{{ animal.sexo }}</td>
+                    <td>{{ animal.idade_aproximado }}</td>
+                    <td>{{ animal.especie }}</td>
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}

@@ -10,12 +10,10 @@ class User(db.Model):
 
     id = db.Column(Integer, primary_key=True)
     nome = db.Column(String(255))
-    nome_de_usuario = db.Column(String(255), unique=True)
     email = db.Column(String(255), unique=True)
     senha = db.Column(String(255))
 
-    def __init__(self, nome, email, senha, nome_de_ususariao):
-        self.nome_de_usuario = nome_de_ususariao
+    def __init__(self, nome, email, senha):
         self.nome = nome
         self.email = email
         self.senha = senha
@@ -32,11 +30,12 @@ class Tutor(db.Model):
     tel = db.Column(String(20))
     endereco = db.Column(String(255))
 
-    def __init__(self, nome, cpf, tel, endereco):
+    def __init__(self, id, nome, cpf, tel, endereco):
         self.nome = nome
         self.cpf = cpf
         self.tel = tel
         self.endereco = endereco
+
 
     def __repr__(self):
         return f'<Tutor {self.id}>'
@@ -54,8 +53,8 @@ class Animal(db.Model):
 
     @validates('sexo')
     def validate_sexo(self, key, value):
-        if value.lower() not in ['masculino', 'feminino']:
-            raise ValueError('O sexo deve ser "masculino" ou "feminino"')
+        if value.lower() not in ['Macho', 'Fêmea']:
+            raise ValueError('O sexo deve ser "Macho" ou "Fêmea"')
         return value
 
     @validates('especie')

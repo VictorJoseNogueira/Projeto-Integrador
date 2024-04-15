@@ -1,10 +1,38 @@
 {% extends "base.html" %}
 
-{% block title %} detalhes do tutor - nome do tutor {% endblock title %}
+{% block title %}- Cadastrar tutor {% endblock title %}
 
 {% block content %}
-    
-  end
-  
-{% endblock content %}
+      <div class="container-global-cadastro">
+        <div class="container-cadastro-tutor">
+          <form action="" method="POST">
+            {{tutores.crf_token}}
+            
+                <div class="form-signin">
+                <label class="form-label" for="inputName"> Nome</label>
+                {{ tutores.nome(class='form-control', placeholder='Nome do tutor') }}
 
+                <label class="form-label" for="inputCPF">CPF</label>
+                {{tutores.cpf(class='form-control', placeholder='xxx.xxx.xxx-xx')}}
+
+                <label class="form-label" for="inputTEL">Telefone</label>
+                {{tutores.tel(class='form-control', placeholder='(xx)x.xxxx-xxxx')}}
+
+                <label class="form-label" for="inputEndereco">Endereço</label>
+                {{tutores.endereco(class='form-control', placeholder='R. nome da rua, Bairro. nome do bairro')}}
+                
+              </div>
+          
+                <button class="btn btn-primary btn-block btn-color" type="submit">Cadastrar</button>
+            
+              <!-- Submit button -->
+              
+              </form>
+          </div>
+          <div class="container-cadastro-img">
+            <img src="{{url_for('static', filename='img/tutor-cadastro-450-be.png')}}" alt="imagem de um tutor segurando um cachorro">
+          </div>
+ 
+    {% endblock content %}
+    
+    

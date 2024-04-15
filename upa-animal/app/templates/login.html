@@ -21,8 +21,9 @@
         </div>
         <div class="container-login-form">
 
-            <form class="form-signin" action='' method='GET'>
-                
+            <form class="form-signin" action='' method='POST'>
+             {{login.csrf_token}} 
+
                 <h1 class="h3 mb-3 font-weight-normal">Faça seu Login</h1>
 
                 <label for="inputEmail" class="sr-only">Email</label>

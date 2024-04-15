@@ -22,6 +22,7 @@
     border-radius: 10px;
     text-align: center;
     background-color: #3a9ca538;
+    overflow: hidden;
 
     }
 
@@ -188,3 +189,42 @@ width: 450px;}
 .form-signin > * {
   margin-bottom: 10px; /* Adiciona um espaço de 5px entre cada elemento */
 }
+
+
+.container-cadastro-tutor{
+
+  padding: 5px;
+  max-width: 60%;
+  border-radius: 20px;
+  
+
+}
+
+.container-cadastro-img{
+
+max-width: 40%;
+border: 20px;
+
+}
+
+.container-cadastro-tutor, .container-cadastro-img{ 
+  float: left; /* Faz com que as divs fiquem uma ao lado da outra */
+  box-sizing: border-box; /* Inclui a largura da borda e do preenchimento no cálculo da largura */
+  padding: 20px; /* Espaçamento interno para melhorar a visualização */
+  width: 60%;
+}
+.container-global-cadastro{
+    
+  width: 90%;
+  margin-top: 3%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  padding-left: 20px;
+  padding-right: 50px;
+  border-radius: 10px;
+  text-align: center;
+  background-color: #3a9ca5c5;
+  overflow: hidden;
+
+  }

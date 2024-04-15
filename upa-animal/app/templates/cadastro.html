@@ -1,15 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
-<form action="" method="POST"></form>
+<form action="" method="POST">
+
+    {{cadastro.csrf_token}}
     <div class="container-login-form">
         <h1 class="h3 mb-3 font-weight-normal">Cadastre um novo usuario</h1>
-    <div class="form-signin">
-        {{cadastro.nome(class="form-control", placeholder="nome")}}
-        {{cadastro.email(class="form-control", placeholder="email")}}
-        {{cadastro.senha(class="form-control", placeholder="senha")}}
-
-
+        <div class="form-signin">
+            <label for="inputName" class="sr-only">Nome</label>
+            {{cadastro.nome(class="form-control", placeholder="nome")}}
+            <label for="inputEmail" class="sr-only">Email</label>
+            {{cadastro.email(class="form-control", placeholder="email")}}
+            <label for="inputPassword" class="sr-only">Senha</label>
+            {{cadastro.senha(class="form-control", placeholder="senha")}}
+        </div>
+        <button class="btn btn-primary btn-block btn-color" type="submit">Entrar</button>
+    </form>
     </div>
-</div>
 </div>
 {% endblock content %}

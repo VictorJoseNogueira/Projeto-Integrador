@@ -7,6 +7,8 @@
 
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
     <title>Centro de Proteção Animal {% block title %}{% endblock title %}</title>
 </head>
@@ -22,7 +24,7 @@
                 </li>
                 
                 <li><a href="https://centrodeprotecaoanimal.maua.sp.gov.br/adocao/" target="_blank" class="btn btn-primary btn-color">Adoção</a> </li>
-                <li><a href="#" class="btn btn-primary btn-color">Castração</a></li>
+                <li><a href="{{url_for('cad_animal')}}" class="btn btn-primary btn-color">Castração</a></li>
                 <li><a href="{{url_for('animais')}}" class="btn btn-primary btn-color">animais</a></li>
                 <li><a href="{{url_for('tutor')}}" class="btn btn-primary btn-color">tutor</a></li>
                 <li><a href="{{ url_for('cadastro') }}" class="btn btn-primary btn-color">Cadastrar novo usuario </a></li>

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-global-cadastro">
+    <form class="row g-3">
+        <div class="form-signin">
+        <div class="col-12">
+          <label for="inputEmail4" class="form-label">Nome</label>
+          <input type="email" class="form-control" id="inputEmail4">
+        </div>
+        <div class="row">
+        <div class="col-md-6">
+          <label for="inputPassword4" class="form-label">Peso</label>
+          <input type="password" class="form-control" id="inputPassword4"placeholder="Peso aproximado">
+        </div>
+        <div class="col-md-6">
+          <label for="inputAddress" class="form-label">Idade</label>
+          <input type="text" class="form-control" id="inputAddress" placeholder="Idade aproximada">
+        </div>
+        </div>
+          <div class="col-12">
+          <label for="inputAddress2" class="form-label"> tutor (tem que ser um get do id do tutor)</label>
+          <input type="text" class="form-control" id="inputAddress2" placeholder="Id do tutor">
+        </div>
+        <div class="row">
+
+        <div class="col-md-6">
+            <label for="inputState" class="form-label">Sexo</label>
+            <select id="inputState" class="form-select">
+                <option selected>escolha...</option>
+                <option>macho</option>
+                <option>fêmea</option>
+            </select>
+        </div>
+        
+        <div class="col-md-6">
+        <label for="inputState" class="form-label">Espécie</label>
+        <select id="inputState" class="form-select">
+            <option selected>escolha...</option>
+            <option>cachorro</option>
+            <option>gato</option>
+            </select>
+            
+        </div>
+        </div>
+        <button class="btn btn-primary btn-block btn-color" type="submit">Cadastrar</button>
+        
+
+        </div>
+        </div>
+      </form>
+</div>
+
+
+{% endblock content %}

@@ -30,7 +30,7 @@ class Tutor(db.Model):
     tel = db.Column(String(20))
     endereco = db.Column(String(255))
 
-    def __init__(self, id, nome, cpf, tel, endereco):
+    def __init__(self, nome, cpf, tel, endereco):
         self.nome = nome
         self.cpf = cpf
         self.tel = tel
@@ -38,7 +38,7 @@ class Tutor(db.Model):
 
 
     def __repr__(self):
-        return f'<Tutor {self.id}>'
+        return f'<tutor {self.id}>'
 
 class Animal(db.Model):
     __tablename__ = "animal"

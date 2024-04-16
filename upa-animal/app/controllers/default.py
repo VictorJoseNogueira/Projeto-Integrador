@@ -20,14 +20,14 @@ def login():
 @app.route('/tutor/<info>')
 @app.route('/tutor/', defaults={'info':None}, methods=['GET', 'POST'])
 def tutor(info):
-    tutores = cadastrar_tutor()
-    if tutores.validate_on_submit():
-        print(tutores.nome.data)
-        novo_tutor = Tutor(nome=tutores.nome.data, cpf=tutores.cpf.data, tel=tutores.tel.data, endereco = tutores.endereco.data)
+    form = cadastrar_tutor()
+    if form.validate_on_submit():
+        print(form.nome.data)
+        novo_tutor = Tutor(nome=form.nome.data, cpf=form.cpf.data, tel=form.tel.data, endereco = form.endereco.data)
         db.session.add(novo_tutor)
         db.session.commit()
         return redirect(url_for('index'))
-    return render_template("tutor.html", tutores=tutores)
+    return render_template("tutor.html", tutores=form)
 
 
 @app.route("/cadastro/<info>")
@@ -46,6 +46,16 @@ def cadastro(info):
 def animais():
     animals = Animal.query.all()
     return render_template('detail.html', animals=animals)
+
+
+
+
+@app.route('/animal/')
+def cad_animal():
+    cad_animal = ''
+    return render_template('animal_cadastro.html')
+
+
 
 '''@app.route('/detalhes/')
 def xpace():

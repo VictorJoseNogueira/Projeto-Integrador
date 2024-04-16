@@ -6,17 +6,18 @@
       <div class="container-global-cadastro">
         <div class="container-cadastro-tutor">
           <form action="" method="POST">
-            {{tutores.crf_token}}
+            {{ tutores.hidden_tag() }}
             
                 <div class="form-signin">
                 <label class="form-label" for="inputName"> Nome</label>
                 {{ tutores.nome(class='form-control', placeholder='Nome do tutor') }}
 
-                <label class="form-label" for="inputCPF">CPF</label>
-                {{tutores.cpf(class='form-control', placeholder='xxx.xxx.xxx-xx')}}
-
                 <label class="form-label" for="inputTEL">Telefone</label>
-                {{tutores.tel(class='form-control', placeholder='(xx)x.xxxx-xxxx')}}
+                <input type="tel" class="form-control" id="inputTEL" name="tel" placeholder="(XX) X.XXXX-XXXX">
+                
+                <label class="form-label" for="inputCPF">CPF</label>
+                <input type="text" class="form-control" id="inputCPF" name="cpf" placeholder="XXX.XXX.XXX-XX">
+                
 
                 <label class="form-label" for="inputEndereco">Endereço</label>
                 {{tutores.endereco(class='form-control', placeholder='R. nome da rua, Bairro. nome do bairro')}}
@@ -33,6 +34,18 @@
             <img src="{{url_for('static', filename='img/tutor-cadastro-450-be.png')}}" alt="imagem de um tutor segurando um cachorro">
           </div>
  
+
+          <script>
+            $(document).ready(function() {
+              // Aplicar máscara de telefone
+              $('#inputTEL').mask('(00)00000-0000');
+          
+              // Aplicar máscara de CPF
+              $('#inputCPF').mask('000.000.000-00', {reverse: true});
+            });
+          </script>
+          
+              
     {% endblock content %}
-    
-    
+
+

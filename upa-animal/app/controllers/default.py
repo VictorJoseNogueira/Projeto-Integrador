@@ -26,7 +26,12 @@ def tutor(info):
         novo_tutor = Tutor(nome=form.nome.data, cpf=form.cpf.data, tel=form.tel.data, endereco = form.endereco.data)
         db.session.add(novo_tutor)
         db.session.commit()
-        return redirect(url_for('index'))
+        
+        id_tutor = novo_tutor.id
+
+        return redirect(url_for('cad_animal', id_tutor=id_tutor))
+
+    
     return render_template("tutor.html", tutores=form)
 
 
@@ -50,10 +55,10 @@ def animais():
 
 
 
-@app.route('/animal/')
-def cad_animal():
-    cad_animal = ''
-    return render_template('animal_cadastro.html')
+@app.route('/animal/<int:id_tutor>', methods=['GET', 'POST'])
+def cad_animal(id_tutor):
+    id_tutor = request.form.get('id_tutor')
+    return 'Página de cadastro do animal para o tutor com ID {}'.format(id_tutor)
 
 
 

@@ -4,7 +4,7 @@
 
     <div class="container-global">
         <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-secondary btn-color">ADD</button>
+            <a class="btn btn-secondary btn-color" href="{{url_for('tutor')}}">ADD</a>
             <button type="button" class="btn btn-secondary btn-color">EDIT</button>
             <button type="button" class="btn btn-secondary btn-color">DEL</button>
           </div>
@@ -23,7 +23,7 @@
                         {% for tutor in tutores %}
                         <tr>
                             <td>{{ tutor.id }}</td>
-                            <td>{{ tutor.nome }}</td>
+                            <td><a href="{{ url_for('detalhamento', info=tutor.id) }}">{{ tutor.nome }}</a></td>
                             <td>{{ tutor.cpf }}</td>
                             <td>{{ tutor.tel }}</td>
                             <td>{{ tutor.endereco }}</td>                      

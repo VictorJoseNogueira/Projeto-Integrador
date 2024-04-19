@@ -26,7 +26,6 @@
                 <li><a href="https://centrodeprotecaoanimal.maua.sp.gov.br/adocao/" target="_blank" class="btn btn-primary btn-color">Adoção</a> </li>
                 <li><a href="#" class="btn btn-primary btn-color">Castração</a></li>
                 <li><a href="{{url_for('animais')}}" class="btn btn-primary btn-color">animais</a></li>
-                <li><a href="{{url_for('tutor')}}" class="btn btn-primary btn-color">tutor</a></li>
                 <li><a href="{{ url_for('cadastro') }}" class="btn btn-primary btn-color">Cadastrar novo usuario </a></li>
                  {% if request.path != url_for('login') %}
                  <li><a href="{{ url_for('login') }}" class="btn btn-primary btn-color">Logout</a></li>

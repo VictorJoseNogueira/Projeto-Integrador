@@ -228,3 +228,13 @@ border: 20px;
   overflow: hidden;
 
   }
+
+  a{
+    text-decoration: none;
+    color: black;
+    transition: color 0.5s ease;
+  }
+
+  a:hover{
+    color: var(--branco-acinzentado);
+  }

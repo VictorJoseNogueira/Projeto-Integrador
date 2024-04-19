@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<div class="table-container">
+    <table class="table-color">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Tel</th>
+                <th>Endereço</th>
+              </tr>
+              <tbody>
+                <tr>
+                    <td>{{ tutor.id }}</td>
+                    <td>{{ tutor.nome }}</td>
+                    <td>{{ tutor.cpf }}</td>
+                    <td>{{ tutor.tel }}</td>
+                    <td>{{ tutor.endereco }}</td>                      
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock content %}

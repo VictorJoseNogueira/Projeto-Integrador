@@ -87,4 +87,6 @@ def xpace():
 @app.route('/detalhe/<int:info>')
 def detalhamento(info):
     tutor = Tutor.query.get(info)
-    return render_template('detalhamento.html', tutor=tutor)
+    animais = Animal.query.filter_by(id_tutor=info).all()
+    return render_template('detalhamento.html', tutor=tutor, animais=animais)
+ 

@@ -3,27 +3,119 @@
 
 {% block content %}
 
-<div class="table-container">
-    <table class="table-color">
+<div class="container-global-grid">
+    <div class="perfil-tutor">
+
+            
+<h1>
+    {{ tutor.nome}} 
+</h1>
+
+
+<label for="" class="group-form">ID: </label>
+<label for="" class="group-form">{{ tutor.id }}</label>
+
+<br>
+
+<label for="" class="group-form">Nome: </label>
+<label for="" class="group-form">{{ tutor.nome }}</label>
+<br>
+
+
+<label for="" class="group-form">CPF: </label>
+<label for="" class="group-form">{{ tutor.cpf }}</label>
+
+<br>
+
+
+<label for="" class="group-form">TEL: </label>
+<label for="" class="group-form">{{ tutor.tel }}</label>
+
+<br>
+
+<label for="" class="group-form">Endereço: </label>
+<label for="" class="group-form">{{ tutor.endereco }}</label>
+
+</div>
+    
+
+<div class="detalhamento-animal">
+    <div class="detalhamento-animal">
+        {% if animais %}
+            <table class="table">
+
         <thead>
             <tr>
                 <th>#</th>
                 <th>Nome</th>
-                <th>CPF</th>
-                <th>Tel</th>
-                <th>Endereço</th>
-              </tr>
-              <tbody>
+                <th>Peso</th>
+                <th>Sexo</th>
+                <th>Idade</th>
+                <th>Espécie</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for animal in animais %}
+            <tr>
+                <td>{{ animal.animal_id }}</td>
+                <td>{{ animal.nome }}</td>
+                <td>{{ animal.peso_aproximado }}</td>
+                <td>{{ animal.sexo }}</td>
+                <td>{{ animal.idade_aproximado }}</td>
+                <td>{{ animal.especie }}</td>
+                
+            </tr>
+            
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="centralize">
+
+        <a href="#" class="btn btn-primary btn-color">Cadastrar animais</a>
+    </div>
+        {% else %}
+        <table class="table-color">
+
+            <thead>
                 <tr>
-                    <td>{{ tutor.id }}</td>
-                    <td>{{ tutor.nome }}</td>
-                    <td>{{ tutor.cpf }}</td>
-                    <td>{{ tutor.tel }}</td>
-                    <td>{{ tutor.endereco }}</td>                      
+                    <th>#</th>
+                    <th>Nome</th>
+                    <th>Peso</th>
+                    <th>Sexo</th>
+                    <th>Idade</th>
+                    <th>Espécie</th>
+                    
                 </tr>
+            </thead>
+            <tbody>
+                
+                <tr>
+                    <td>vazio</td>
+                    <td>vazio</td>
+                    <td>vazio</td>
+                    <td>vazio</td>
+                    <td>vazio</td>
+                    <td>vazio</td>
+                    
+                    
+                </tr>
+                
+                
             </tbody>
         </table>
-    </div>
+        <div class="centralize">
 
+            <a href="#" class="btn btn-primary btn-color">Cadastrar animais</a>
+        </div>
+
+            {% endif %}
+    </div>
+    
+ 
+    
+</div>
+
+</div>
 
 {% endblock content %}

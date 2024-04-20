@@ -238,3 +238,39 @@ border: 20px;
   a:hover{
     color: var(--branco-acinzentado);
   }
+
+
+  .container-global-grid {
+    display: flex;
+    grid-gap: 20px; /* Remover o espaçamento entre as colunas */
+    width: 90%;
+    margin-top: 3%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    padding-left: 20px;
+    padding-right: 50px;
+    border-radius: 10px;
+    background-color: #3a9ca549;
+}
+
+  .perfil-tutor{
+    flex-basis: 40%;
+    flex-grow: 1;
+    border-radius: 10px;
+
+  }
+
+  .detalhamento-animal{
+    flex-basis: 60%;
+    flex-grow: 1;
+        border-radius: 10px;
+
+  }
+
+  .centralize {
+    margin: auto;
+    display: flex; /* Enable flexbox for horizontal centering */
+    justify-content: center; /* Horizontally center content within the element */
+    align-items: center; /* Vertically center content within the element (optional) */
+  }

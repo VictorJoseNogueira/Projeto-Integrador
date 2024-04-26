@@ -44,7 +44,6 @@ def tutor(info):
 
 
 
-
 # pagina de cadastro de novos funcionarios
 @app.route("/cadastro/<info>")
 @app.route("/cadastro/", defaults={'info':None}, methods=['GET', 'POST'])

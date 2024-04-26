@@ -76,13 +76,6 @@ def cad_animal(id_tutor):
 
 
 
-'''@app.route('/detalhes/')
-def xpace():
-    animals = Animal.query.filter_by(id_tutor=5).all()
-    return render_template('detail.html', animals=animals)
-'''
-
-
 
 @app.route('/detalhe/<int:info>')
 def detalhamento(info):
@@ -90,3 +83,23 @@ def detalhamento(info):
     animais = Animal.query.filter_by(id_tutor=info).all()
     return render_template('detalhamento.html', tutor=tutor, animais=animais)
  
+
+@app.route('/detalhe/cadastro/<int:info>', methods=['GET', 'POST'])
+def cadastramento_animal(info):
+    tutor_id = info
+    cadastro_animal = cadastrar_animal()
+    print('TESTE1234')
+
+    if cadastro_animal.validate_on_submit():
+        novo_animal=Animal(nome=cadastro_animal.nome_animal.data,
+                        peso_aproximado=cadastro_animal.peso.data,
+                        idade_aproximada=cadastro_animal.idade.data,
+                        sexo=cadastro_animal.sexo.data,
+                        especie=cadastro_animal.raca.data, 
+                        id_tutor=tutor_id)
+
+        db.session.add(novo_animal)
+        db.session.commit()
+        return redirect(url_for('index'))
+
+    return render_template('animal_cadastro.html', info=tutor_id, cadastro_animal=cadastro_animal)

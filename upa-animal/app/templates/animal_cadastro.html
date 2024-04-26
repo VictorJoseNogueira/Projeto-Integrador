@@ -3,44 +3,44 @@
 {% block content %}
 
 <div class="container-global-cadastro">
-    <form class="row g-3">
+    <form class="row g-3" action="" method="POST">
+      {{ cadastro_animal.hidden_tag() }}
         <div class="form-signin">
         <div class="col-12">
           <label for="inputEmail4" class="form-label">Nome</label>
-          <input type="email" class="form-control" id="inputEmail4">
+          {{cadastro_animal.nome_animal(class='form-control', id='inputEmail4')}}
+
         </div>
         <div class="row">
         <div class="col-md-6">
-          <label for="inputPassword4" class="form-label">Peso</label>
-          <input type="password" class="form-control" id="inputPassword4"placeholder="Peso aproximado">
+          <label  class="form-label">Peso</label>
+          {{cadastro_animal.peso(class='form-control', placeholder='Peso aproximado', step='0.1')}}
+          
         </div>
         <div class="col-md-6">
           <label for="inputAddress" class="form-label">Idade</label>
-          <input type="text" class="form-control" id="inputAddress" placeholder="Idade aproximada">
+          {{cadastro_animal.idade(class='form-control', placeholder='Idade aproximada') }}
         </div>
         </div>
-          <div class="col-12">
-          <label for="inputAddress2" class="form-label"> tutor (tem que ser um get do id do tutor)</label>
-          <input type="text" class="form-control" id="inputAddress2" placeholder="Id do tutor">
-        </div>
+        <div class="col-12">
+          <label for="inputAddress" class="form-label">ID Tutor </label>
+          <label for="inputAddress2" class="form-control">{{ info }}</label>
+          {{cadastro_animal.id_tutor(class='form-control')}}
+      </div>
+      
         <div class="row">
 
         <div class="col-md-6">
             <label for="inputState" class="form-label">Sexo</label>
-            <select id="inputState" class="form-select">
-                <option selected>escolha...</option>
-                <option>macho</option>
-                <option>fêmea</option>
-            </select>
+            {{ cadastro_animal.sexo(class='form-select', id='inputState', choices=[('', 'Escolha...'), ('macho'), ('femea')]) }}
+         
+          
         </div>
         
         <div class="col-md-6">
         <label for="inputState" class="form-label">Espécie</label>
-        <select id="inputState" class="form-select">
-            <option selected>escolha...</option>
-            <option>cachorro</option>
-            <option>gato</option>
-            </select>
+        {{ cadastro_animal.raca(class='form-select', id='inputState', choices=[('', 'Escolha...'), ('cachorro'), ('gato')]) }}
+
             
         </div>
         </div>
@@ -51,6 +51,7 @@
         </div>
       </form>
 </div>
+
 
 
 {% endblock content %}

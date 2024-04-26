@@ -23,8 +23,8 @@ class cadastrar_tutor(FlaskForm):
 
 class cadastrar_animal(FlaskForm):
     nome_animal = StringField('nome', validators=[DataRequired()])
-    raca = SelectField('Raça', choices=[('gato', 'Gato'), ('cachorro', 'Cachorro')], validators=[DataRequired()])
+    raca = SelectField('Raça', choices=[('gato'), ('cachorro')], validators=[DataRequired()])
     peso = FloatField('Peso', validators=[DataRequired()])
     idade = IntegerField('Idade', validators=[DataRequired()])
-    sexo = SelectField('Sexo', choices=[('macho', 'Macho'), ('femea', 'Fêmea')], validators=[DataRequired()])
-
+    sexo = SelectField('Sexo', choices=[('macho'), ('femea')], validators=[DataRequired()])
+    id_tutor = IntegerField('ID Tutor', validators=[DataRequired()])

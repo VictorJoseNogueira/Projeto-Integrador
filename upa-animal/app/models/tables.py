@@ -20,7 +20,6 @@ class User(db.Model):
 
     def __repr__(self):
         return f"<USER {self.nome_de_usuario}>"
-    
 
 class Tutor(db.Model):
     __tablename__ = "tutor"
@@ -53,8 +52,8 @@ class Animal(db.Model):
 
     @validates('sexo')
     def validate_sexo(self, key, value):
-        if value.lower() not in ['Macho', 'Fêmea']:
-            raise ValueError('O sexo deve ser "Macho" ou "Fêmea"')
+        if value.lower() not in ['macho', 'femea']:
+            raise ValueError('O sexo deve ser "macho" ou "femea"')
         return value
 
     @validates('especie')
@@ -66,9 +65,9 @@ class Animal(db.Model):
     def __init__(self, nome, peso_aproximado, sexo, idade_aproximada, id_tutor, especie):
         self.nome = nome
         self.peso_aproximado = peso_aproximado
-        self.sexo = sexo
         self.idade_aproximada = idade_aproximada
-        self.id_tutor = id_tutor
+        self.sexo = sexo
+        self.id_tutor = id_tutor    
         self.especie = especie
 
     def __repr__(self):

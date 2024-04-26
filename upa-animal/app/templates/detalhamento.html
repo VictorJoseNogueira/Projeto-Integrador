@@ -105,9 +105,9 @@
             </tbody>
         </table>
         <div class="centralize">
-
-            <a href="#" class="btn btn-primary btn-color">Cadastrar animais</a>
+            <a href="{{ url_for('cadastramento_animal', info=tutor.id) }}" class="btn btn-primary btn-color">Cadastrar animais</a>
         </div>
+        
 
             {% endif %}
     </div>

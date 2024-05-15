@@ -27,4 +27,4 @@ class cadastrar_animal(FlaskForm):
     peso = FloatField('Peso', validators=[DataRequired()])
     idade = IntegerField('Idade', validators=[DataRequired()])
     sexo = SelectField('Sexo', choices=[('macho'), ('femea')], validators=[DataRequired()])
-    id_tutor = IntegerField('ID Tutor', validators=[DataRequired()])
+    id_tutor = IntegerField('ID Tutor', validators=[DataRequired()], render_kw={'style': 'display:none;'})

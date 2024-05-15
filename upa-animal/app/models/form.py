@@ -19,7 +19,7 @@ class cadastrar_tutor(FlaskForm):
     tel = StringField('tel', validators=[DataRequired()])
     endereco = StringField('endereco', validators=[DataRequired()])
 
-
+    
 
 class cadastrar_animal(FlaskForm):
     nome_animal = StringField('nome', validators=[DataRequired()])

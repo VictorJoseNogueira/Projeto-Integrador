@@ -35,20 +35,23 @@ class Tutor(db.Model):
         self.tel = tel
         self.endereco = endereco
 
-
     def __repr__(self):
         return f'<tutor {self.id}>'
+
 
 class Animal(db.Model):
     __tablename__ = "animal"
     animal_id = db.Column(Integer, primary_key=True)
     nome = db.Column(String(255))
     peso_aproximado = db.Column(Float)
-    sexo = db.Column(String(10))
     idade_aproximado = db.Column(Integer)
-    id_tutor = db.Column(Integer, ForeignKey("tutor.id"))
+    sexo = db.Column(String(10))
     especie = db.Column(String(50))
-    tutor = db.relationship('Tutor', foreign_keys=[id_tutor])
+
+    #chave estrangeira
+    id_tutor = db.Column(Integer, ForeignKey("tutor.id"))
+    #relacionamento
+    tutor = relationship("Tutor", backref="animais")
 
     @validates('sexo')
     def validate_sexo(self, key, value):
@@ -62,10 +65,10 @@ class Animal(db.Model):
             raise ValueError("A especie só pode ser cachorro ou gato")
         return value
 
-    def __init__(self, nome, peso_aproximado, sexo, idade_aproximada, id_tutor, especie):
+    def __init__(self, nome, peso_aproximado, sexo, idade_aproximado, id_tutor, especie):
         self.nome = nome
         self.peso_aproximado = peso_aproximado
-        self.idade_aproximada = idade_aproximada
+        self.idade_aproximado = idade_aproximado
         self.sexo = sexo
         self.id_tutor = id_tutor    
         self.especie = especie

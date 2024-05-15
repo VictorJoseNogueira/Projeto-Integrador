@@ -18,8 +18,10 @@
           
         </div>
         <div class="col-md-6">
-          <label for="inputAddress" class="form-label">Idade</label>
-          {{cadastro_animal.idade(class='form-control', placeholder='Idade aproximada') }}
+
+          <label for="inputidade" class="form-label">Idade</label>
+          {{ cadastro_animal.idade(class='form-control', placeholder='Idade aproximada', type='number', required=True) }}
+
         </div>
         </div>
         <div class="col-12">

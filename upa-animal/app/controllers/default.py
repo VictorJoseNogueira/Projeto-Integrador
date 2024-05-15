@@ -29,18 +29,19 @@ def login():
 @app.route('/tutor/', defaults={'info':None}, methods=['GET', 'POST'])
 def tutor(info):
     form = cadastrar_tutor()
-    if form.validate_on_submit():
-        print(form.nome.data)
-        novo_tutor = Tutor(nome=form.nome.data, cpf=form.cpf.data, tel=form.tel.data, endereco = form.endereco.data)
-        db.session.add(novo_tutor)
-        db.session.commit()
-        
-        id_tutor = novo_tutor.id
+    try:
+        if form.validate_on_submit():
+            print(form.nome.data)
+            novo_tutor = Tutor(nome=form.nome.data, cpf=form.cpf.data, tel=form.tel.data, endereco=form.endereco.data)
+            db.session.add(novo_tutor)
+            db.session.commit()
+            id_tutor = novo_tutor.id
 
-        return redirect(url_for('cad_animal', id_tutor=id_tutor))
-
-    
+            return redirect(url_for('cadastramento_animal', info=id_tutor))
+    except Exception as e:
+        return f"Erro ao cadastrar: {e}"
     return render_template("tutor.html", tutores=form)
+
 
 
 
@@ -70,7 +71,7 @@ def animais():
 @app.route('/animal/<int:id_tutor>', methods=['GET', 'POST'])
 def cad_animal(id_tutor):
     id_tutor = request.form.get('id_tutor')
-    return 'Página de cadastro do animal para o tutor com ID {}'.format(id_tutor)
+    return render_template(cadastramento_animal)
 
 
 
@@ -88,17 +89,29 @@ def cadastramento_animal(info):
     tutor_id = info
     cadastro_animal = cadastrar_animal()
     print('TESTE1234')
+    try:
+        if cadastro_animal.validate_on_submit():
+            novo_animal=Animal(nome=cadastro_animal.nome_animal.data.strip(),
+                            peso_aproximado=cadastro_animal.peso.data,
+                            idade_aproximado=cadastro_animal.idade.data,
+                            sexo=cadastro_animal.sexo.data,
+                            especie=cadastro_animal.raca.data, 
+                            id_tutor=tutor_id)
 
-    if cadastro_animal.validate_on_submit():
-        novo_animal=Animal(nome=cadastro_animal.nome_animal.data,
-                        peso_aproximado=cadastro_animal.peso.data,
-                        idade_aproximada=cadastro_animal.idade.data,
-                        sexo=cadastro_animal.sexo.data,
-                        especie=cadastro_animal.raca.data, 
-                        id_tutor=tutor_id)
-
-        db.session.add(novo_animal)
-        db.session.commit()
-        return redirect(url_for('index'))
-
+            db.session.add(novo_animal)
+            db.session.commit()
+            return redirect(url_for('index'))
+    except Exception as e:
+        return render_template('erro.html')
+    
     return render_template('animal_cadastro.html', info=tutor_id, cadastro_animal=cadastro_animal)
+
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template('erro.html', e='Página não encontrada'), 404
+
+
+@app.errorhandler(500)
+def internal_server_error(error):
+    return render_template('error.html', e='Erro interno do servidor'), 500

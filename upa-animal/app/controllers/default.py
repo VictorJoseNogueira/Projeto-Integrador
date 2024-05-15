@@ -88,7 +88,7 @@ def detalhamento(info):
 def cadastramento_animal(info):
     tutor_id = info
     cadastro_animal = cadastrar_animal()
-    print('TESTE1234')
+    hide_id_tutor = True
     try:
         if cadastro_animal.validate_on_submit():
             novo_animal=Animal(nome=cadastro_animal.nome_animal.data.strip(),
@@ -104,7 +104,7 @@ def cadastramento_animal(info):
     except Exception as e:
         return render_template('erro.html')
     
-    return render_template('animal_cadastro.html', info=tutor_id, cadastro_animal=cadastro_animal)
+    return render_template('animal_cadastro.html', info=tutor_id, cadastro_animal=cadastro_animal,hide_id_tutor=hide_id_tutor)
 
 
 @app.errorhandler(404)

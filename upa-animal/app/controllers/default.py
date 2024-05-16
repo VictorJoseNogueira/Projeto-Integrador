@@ -1,32 +1,61 @@
-from app import app, db
+from app import app, db, login_manager
 from flask import render_template, url_for, redirect, request, session
 from app.models.tables import User, Tutor, Animal
 from app.models.form import LoginForm,Cadastro,cadastrar_animal,cadastrar_tutor
+from flask_login import login_user, login_required, logout_user
+from werkzeug.exceptions import Unauthorized
+
+
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
 
 
 #pagina inicial 
 @app.route("/")
 @app.route("/index/")
+@login_required
 def index():
+    print(session.get('logged_in'))
+    if not session.get('logged_in') or not session['logged_in']:
+        return redirect(url_for('login'))
     tutores = Tutor.query.order_by(Tutor.id.desc()).limit(10).all()
     return render_template('index.html',tutores=tutores)
 
 
-
 # pagina login
-@app.route('/login/', methods=['GET','POST'])
+'''@app.route('/login/', methods=['GET','POST'])
 def login():
     login = LoginForm()
     if login.validate_on_submit():
+        user = User.query.filter_by(email=login.email.data).first()
+        if user:
+            if user.senha == login.senha.data:
+                session['logged_in']= True
+                return redirect(url_for('index'))
         print(login.email.data)
         print(login.senha.data)
     return render_template("login.html", login=login)
 
+'''
+@app.route('/login/', methods=['GET','POST'])
+def login():
+    login = LoginForm()
+    if login.validate_on_submit():
+        user = User.query.filter_by(email=login.email.data).first()
+        if user and user.senha == login.senha.data:
+            login_user(user)
+            return redirect(url_for('index'))
+    return render_template("login.html", login=login)
 
 
 # pagina de cadastro para tutores 
 @app.route('/tutor/<info>')
 @app.route('/tutor/', defaults={'info':None}, methods=['GET', 'POST'])
+@login_required
 def tutor(info):
     form = cadastrar_tutor()
     try:
@@ -48,6 +77,7 @@ def tutor(info):
 # pagina de cadastro de novos funcionarios
 @app.route("/cadastro/<info>")
 @app.route("/cadastro/", defaults={'info':None}, methods=['GET', 'POST'])
+@login_required
 def cadastro(info):
     cadastro = Cadastro()
     if cadastro.validate_on_submit():
@@ -61,6 +91,7 @@ def cadastro(info):
 
 #pagina de exibição dos animais no db
 @app.route('/animais/')
+@login_required
 def animais():
     animals = Animal.query.all()
     return render_template('info_animal.html', animals=animals)
@@ -78,6 +109,7 @@ def cad_animal(id_tutor):
 
 
 @app.route('/detalhe/<int:info>')
+@login_required
 def detalhamento(info):
     tutor = Tutor.query.get(info)
     animais = Animal.query.filter_by(id_tutor=info).all()
@@ -85,6 +117,7 @@ def detalhamento(info):
  
 
 @app.route('/detalhe/cadastro/<int:info>', methods=['GET', 'POST'])
+@login_required
 def cadastramento_animal(info):
     tutor_id = info
     cadastro_animal = cadastrar_animal()
@@ -115,3 +148,19 @@ def page_not_found(error):
 @app.errorhandler(500)
 def internal_server_error(error):
     return render_template('error.html', e='Erro interno do servidor'), 500
+
+@app.errorhandler(Unauthorized)
+def handle_unauthorized(e):
+    return redirect(url_for('login'))
+
+'''@app.route('/logout/')
+def logout():
+    session.pop('logged_in', None)
+    session.clear()
+    return redirect(url_for('index'))
+'''
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('index'))

@@ -2,10 +2,11 @@ from app import db
 from sqlalchemy import Column, String, Integer, Float, ForeignKey
 from sqlalchemy.orm import relationship, validates
 from sqlalchemy.ext.declarative import declarative_base
+from flask_login import UserMixin
 
 Base = declarative_base()
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     __tablename__= "administradores"
 
     id = db.Column(Integer, primary_key=True)
@@ -17,6 +18,9 @@ class User(db.Model):
         self.nome = nome
         self.email = email
         self.senha = senha
+    def is_active(self):
+        print("Método is_active foi chamado.")
+        return True
 
     def __repr__(self):
         return f"<USER {self.nome_de_usuario}>"

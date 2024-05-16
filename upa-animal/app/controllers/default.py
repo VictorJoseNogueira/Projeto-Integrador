@@ -26,21 +26,6 @@ def index():
     return render_template('index.html',tutores=tutores)
 
 
-# pagina login
-'''@app.route('/login/', methods=['GET','POST'])
-def login():
-    login = LoginForm()
-    if login.validate_on_submit():
-        user = User.query.filter_by(email=login.email.data).first()
-        if user:
-            if user.senha == login.senha.data:
-                session['logged_in']= True
-                return redirect(url_for('index'))
-        print(login.email.data)
-        print(login.senha.data)
-    return render_template("login.html", login=login)
-
-'''
 @app.route('/login/', methods=['GET','POST'])
 def login():
     login = LoginForm()
@@ -100,6 +85,7 @@ def animais():
 
 # pagina de cadastro de animais no db
 @app.route('/animal/<int:id_tutor>', methods=['GET', 'POST'])
+@login_required
 def cad_animal(id_tutor):
     id_tutor = request.form.get('id_tutor')
     return render_template(cadastramento_animal)
@@ -153,12 +139,7 @@ def internal_server_error(error):
 def handle_unauthorized(e):
     return redirect(url_for('login'))
 
-'''@app.route('/logout/')
-def logout():
-    session.pop('logged_in', None)
-    session.clear()
-    return redirect(url_for('index'))
-'''
+
 @app.route('/logout')
 @login_required
 def logout():

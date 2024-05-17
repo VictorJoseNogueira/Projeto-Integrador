@@ -21,13 +21,16 @@ def index():
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
-    login_form = LoginForm()
-    if login_form.validate_on_submit():
-        user = User.query.filter_by(email=login_form.email.data).first()
-        if user and user.senha == login_form.senha.data:
+    login = LoginForm()
+    if login.validate_on_submit():
+        user = User.query.filter_by(email=login.email.data).first()
+        if user and user.senha == login.senha.data:
             login_user(user)
+            session['logged_in'] = True  # Adicionado
+            print("User logged in:", user.id)
+
             return redirect(url_for('index'))
-    return render_template("login.html", login=login_form)
+    return render_template("login.html", login=login)
 
 
 @app.route('/tutor/<info>')
@@ -122,4 +125,6 @@ def handle_unauthorized(e):
 @login_required
 def logout():
     logout_user()
+    session.clear()  # Adicionado
+    print("Session after logout:", session)  # Adicionado para verificar sessão
     return redirect(url_for('login'))

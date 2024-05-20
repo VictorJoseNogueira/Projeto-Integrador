@@ -15,9 +15,14 @@ def load_user(user_id):
 @app.route("/index/")
 @login_required
 def index():
-    tutores = Tutor.query.order_by(Tutor.id.desc()).limit(10).all()
+    search = request.args.get('search')
+    if search:
+        tutores = Tutor.query.filter(
+            (Tutor.nome.ilike(f'%{search}%')) | (Tutor.cpf.ilike(f'%{search}%'))
+        ).all()
+    else:
+        tutores = Tutor.query.order_by(Tutor.id.desc()).limit(10).all()
     return render_template('index.html', tutores=tutores)
-
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():

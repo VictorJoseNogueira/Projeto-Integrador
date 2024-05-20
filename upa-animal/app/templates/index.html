@@ -2,42 +2,59 @@
 
 {% block content %}
 
-    <div class="container-global">
-        <div class="btn-group" role="group" aria-label="Basic example">
-            <a class="btn btn-secondary btn-color" href="{{url_for('tutor')}}">ADD</a>
-            <button type="button" class="btn btn-secondary btn-color">EDIT</button>
-            <button type="button" class="btn btn-secondary btn-color">DEL</button>
-          </div>
-
-          <div class="table-container">
-            <table class="table-color">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Nome</th>
-                        <th>CPF</th>
-                        <th>Tel</th>
-                        <th>Endereço</th>
-                      </tr>
-                      <tbody>
-                        {% for tutor in tutores %}
-                        <tr>
-                            <td>{{ tutor.id }}</td>
-                            <td><a href="{{ url_for('detalhamento', info=tutor.id) }}">{{ tutor.nome }}</a></td>
-                            <td>{{ tutor.cpf }}</td>
-                            <td>{{ tutor.tel }}</td>
-                            <td>{{ tutor.endereco }}</td>                      
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+<div class="container-global">
+    <nav class="navbar navbar-light bg-light custom-navbar">
+        <div class="container-fluid">
+            <form class="d-flex custom-form" method="GET" action="{{ url_for('index') }}">
+                <input class="form-control" type="text" name="search" id="search" placeholder="Pesquisar por Nome ou CPF" oninput="formatCPF(this)">
+                <button type="submit" class="btn btn-secondary btn-color">Pesquisar</button>
+            </form>
         </div>
+    </nav>
+<br>    
+    
+<div class="btn-group custom-btn-group" role="group" aria-label="Basic example">
+    <a class="btn btn-secondary btn-color" href="{{url_for('tutor')}}">Adicionar novo tutor</a>
+</div>
 
-       
 
+    <!-- Formulário de Pesquisa -->
+
+    <div class="table-container">
+        <table class="table-color">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Tel</th>
+                    <th>Endereço</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tutor in tutores %}
+                <tr>
+                    <td>{{ tutor.id }}</td>
+                    <td><a href="{{ url_for('detalhamento', info=tutor.id) }}">{{ tutor.nome }}</a></td>
+                    <td>{{ tutor.cpf }}</td>
+                    <td>{{ tutor.tel }}</td>
+                    <td>{{ tutor.endereco }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
+</div>
 
-
+<script>
+function formatCPF(input) {
+    const value = input.value.replace(/\D/g, ''); // Remove non-digit characters
+    if (value.length <= 11) {
+        input.value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, (match, p1, p2, p3, p4) => {
+            return `${p1}.${p2}.${p3}-${p4}`;
+        });
+    }
+}
+</script>
 
 {% endblock content %}

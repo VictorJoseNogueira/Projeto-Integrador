@@ -274,3 +274,40 @@ border: 20px;
     justify-content: center; /* Horizontally center content within the element */
     align-items: center; /* Vertically center content within the element (optional) */
   }
+
+  .custom-navbar {
+    background-color: transparent;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    width: 100%;
+    padding: 10px;
+}
+
+.custom-form {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.custom-form .form-control {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.custom-form .btn-color {
+    flex-shrink: 0;
+}
+
+
+.custom-btn-group {
+  text-align: right; /* Alinha o conteúdo à direita */
+  margin-top: 10px; /* Adiciona um espaço acima do botão */
+}
+
+.red {
+  background-color: rgb(175, 0, 0);
+}
+
+.float-btn {
+  float: right;
+}

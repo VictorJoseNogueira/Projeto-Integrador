@@ -31,13 +31,19 @@ class Tutor(db.Model):
     nome = db.Column(String(255))
     cpf = db.Column(String(14), unique=True)
     tel = db.Column(String(20))
-    endereco = db.Column(String(255))
+    cep = db.Column(String(255))
+    rua = db.Column(String(50))
+    bairro = db.Column(String(20))
+    cidade = db.Column(String(20))
 
-    def __init__(self, nome, cpf, tel, endereco):
+    def __init__(self, nome, cpf, tel, cep, rua, bairro, cidade):
         self.nome = nome
         self.cpf = cpf
         self.tel = tel
-        self.endereco = endereco
+        self.cep = cep
+        self.rua = rua
+        self.bairro = bairro
+        self.cidade = cidade
 
     def __repr__(self):
         return f'<tutor {self.id}>'

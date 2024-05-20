@@ -17,7 +17,10 @@ class cadastrar_tutor(FlaskForm):
     nome = StringField('nome', validators=[DataRequired()])
     cpf = StringField('cpf', validators=[DataRequired()])
     tel = StringField('tel', validators=[DataRequired()])
-    endereco = StringField('endereco', validators=[DataRequired()])
+    cep = StringField('cep', validators=[DataRequired()])
+    rua = StringField('rua', validators=[DataRequired()])
+    bairro  = StringField('bairro', validators=[DataRequired()])
+    cidade = StringField('cidade', validators=[DataRequired()])
 
     
 

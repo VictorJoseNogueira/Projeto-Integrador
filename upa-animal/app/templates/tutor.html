@@ -13,15 +13,23 @@
                 {{ tutores.nome(class='form-control', placeholder='Nome do tutor') }}
 
                 <label class="form-label" for="inputTEL">Telefone</label>
-                <input type="tel" class="form-control" id="inputTEL" name="tel" placeholder="(XX) X.XXXX-XXXX">
+                <input type="tel" class="form-control" id="inputTEL" name="tel" placeholder="(XX) X.XXXX-XXXX" required>
                 
                 <label class="form-label" for="inputCPF">CPF</label>
-                <input type="text" class="form-control" id="inputCPF" name="cpf" placeholder="XXX.XXX.XXX-XX">
+                <input type="text" class="form-control" id="inputCPF" name="cpf" placeholder="XXX.XXX.XXX-XX" required>
                 
+                <label class="form-label" for="inputCEP">CEP</label>
+                <input type="text" class="form-control" id="inputCEP" name="cep" placeholder="12345678" required>
 
-                <label class="form-label" for="inputEndereco">Endereço</label>
-                {{tutores.endereco(class='form-control', placeholder='R. nome da rua, Bairro. nome do bairro')}}
+                <label class="form-label" for="inputRua">Rua</label>
+                {{tutores.rua(class='form-control', placeholder='R. nome da rua, XXX')}}
                 
+                <label class="form-label" for="inputCPF">Bairro</label>
+                <input type="text" class="form-control" id="inputBairro" name="bairro" placeholder="Nome do Bairro">
+
+                <label class="form-label" for="inputCPF">Cidade</label>
+                <input type="text" class="form-control" id="inputCidade" name="cidade" placeholder="Nome da Cidade">
+
               </div>
           
                 <button class="btn btn-primary btn-block btn-color" type="submit">Cadastrar</button>

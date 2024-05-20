@@ -17,7 +17,9 @@
                         <th>Nome</th>
                         <th>CPF</th>
                         <th>Tel</th>
-                        <th>Endereço</th>
+                        <th>Rua</th>
+                        <th>Bairro</th>
+                        <th>Cidade</th>
                       </tr>
                       <tbody>
                         {% for tutor in tutores %}
@@ -26,7 +28,9 @@
                             <td><a href="{{ url_for('detalhamento', info=tutor.id) }}">{{ tutor.nome }}</a></td>
                             <td>{{ tutor.cpf }}</td>
                             <td>{{ tutor.tel }}</td>
-                            <td>{{ tutor.endereco }}</td>                      
+                            <td>{{ tutor.rua }}</td>
+                            <td>{{ tutor.bairro }}</td>  
+                            <td>{{ tutor.cidade }}</td>                        
                         </tr>
                         {% endfor %}
                     </tbody>

@@ -40,7 +40,7 @@ def tutor(info):
     form = cadastrar_tutor()
     try:
         if form.validate_on_submit():
-            novo_tutor = Tutor(nome=form.nome.data, cpf=form.cpf.data, tel=form.tel.data, endereco=form.endereco.data)
+            novo_tutor = Tutor(nome=form.nome.data, cpf=form.cpf.data, tel=form.tel.data, cep=form.cep.data, rua=form.rua.data, bairro=form.bairro.data, cidade=form.cidade.data)
             db.session.add(novo_tutor)
             db.session.commit()
             id_tutor = novo_tutor.id

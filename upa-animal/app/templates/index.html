@@ -2,11 +2,23 @@
 
 {% block content %}
 
+<div class="container">
+    <!-- Bloco para exibir mensagens flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
 <div class="container-global">
     <nav class="navbar navbar-light bg-light custom-navbar">
         <div class="container-fluid">
             <form class="d-flex custom-form" method="GET" action="{{ url_for('index') }}">
-                <input class="form-control" type="text" name="search" id="search" placeholder="Pesquisar por Nome ou CPF" oninput="formatCPF(this)">
+                <input class="form-control" type="text" name="search" id="search" placeholder="Pesquisar por Nome ou CPF">
                 <button type="submit" class="btn btn-secondary btn-color">Pesquisar</button>
             </form>
         </div>
@@ -46,15 +58,16 @@
     </div>
 </div>
 
-<script>
-function formatCPF(input) {
-    const value = input.value.replace(/\D/g, ''); // Remove non-digit characters
-    if (value.length <= 11) {
-        input.value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, (match, p1, p2, p3, p4) => {
-            return `${p1}.${p2}.${p3}-${p4}`;
-        });
-    }
-}
-</script>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            var flashMessages = document.querySelector('.flash-messages');
+            if (flashMessages) {
+                flashMessages.style.display = 'none';
+            }
+        }, 5000); // 5000 milissegundos = 5 segundos
+    });
+</script>
 {% endblock content %}
+

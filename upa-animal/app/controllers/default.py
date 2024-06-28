@@ -1,5 +1,5 @@
 from app import app, db, login_manager
-from flask import render_template, url_for, redirect, request, session
+from flask import render_template, url_for, redirect, request, session, flash
 from app.models.tables import User, Tutor, Animal
 from app.models.form import LoginForm, Cadastro, cadastrar_animal, cadastrar_tutor
 from flask_login import login_user, login_required, logout_user
@@ -18,10 +18,11 @@ def index():
     search = request.args.get('search')
     if search:
         tutores = Tutor.query.filter(
-            (Tutor.nome.ilike(f'%{search}%')) | (Tutor.cpf.ilike(f'%{search}%'))
+            (Tutor.nome.ilike(f'%{search}%')) | (Tutor.cpf.ilike(f'%{search}%')),
+            Tutor.deleted == False
         ).all()
     else:
-        tutores = Tutor.query.order_by(Tutor.id.desc()).limit(10).all()
+        tutores = Tutor.query.filter_by(deleted=False).order_by(Tutor.id.desc()).limit(10).all()
     return render_template('index.html', tutores=tutores)
 
 @app.route('/login/', methods=['GET', 'POST'])
@@ -133,3 +134,14 @@ def logout():
     session.clear()  # Adicionado
     print("Session after logout:", session)  # Adicionado para verificar sessão
     return redirect(url_for('login'))
+
+
+
+@app.route('/remover_tutor/<int:info>', methods=['POST'])
+@login_required
+def remover_tutor(info):
+    tutor = Tutor.query.get_or_404(info)
+    tutor.deleted = True
+    db.session.commit()
+    flash('Tutor foi removido com sucesso.', 'success')
+    return redirect(url_for('index'))  # Redirecione para a rota que deseja, por exemplo 'index'

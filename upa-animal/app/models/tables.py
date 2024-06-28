@@ -27,22 +27,26 @@ class User(db.Model, UserMixin):
 
 class Tutor(db.Model):
     __tablename__ = "tutor"
-    id = db.Column(Integer, primary_key=True)
-    nome = db.Column(String(255))
-    cpf = db.Column(String(14), unique=True)
-    tel = db.Column(String(20))
-    endereco = db.Column(String(255))
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(255))
+    cpf = db.Column(db.String(14), unique=True)
+    tel = db.Column(db.String(20))
+    endereco = db.Column(db.String(255))
+    deleted = db.Column(db.Boolean, default=False)
+    deleted_by = db.Column(db.Integer)
 
-    def __init__(self, nome, cpf, tel, endereco):
+    def __init__(self, nome, cpf, tel, endereco, deleted=False, deleted_by=None):
         self.nome = nome
         self.cpf = cpf
         self.tel = tel
         self.endereco = endereco
+        self.deleted = deleted
+        self.deleted_by = deleted_by
 
     def __repr__(self):
         return f'<tutor {self.id}>'
-
-
+    
+    
 class Animal(db.Model):
     __tablename__ = "animal"
     animal_id = db.Column(Integer, primary_key=True)

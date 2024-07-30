@@ -1,0 +1,25 @@
+# Definição de ambiente para Flask
+
+# Configurações de debug
+DEBUG=True
+
+# Configurações do MySQL
+MYSQL_DATABASE_PORT = "3306"  # Porta padrão do MySQL
+MYSQL_DATABASE = "mydatabase"  # Nome do banco de dados
+MYSQL_HOST = "localhost"  # Endereço do servidor MySQL
+MYSQL_USER = "user"  # Nome de usuário do MySQL
+MYSQL_PASSWORD = "password"  # Senha do MySQL
+
+# Configuração do SQLAlchemy
+SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://user:password@localhost/mydatabase'  # noqa E501 URI de conexão do SQLAlchemy 
+SQLALCHEMY_TRACK_MODIFICATIONS = True
+
+# Chave secreta para sessões
+SECRET_KEY = 'your_secret_key_here'  # Chave secreta para segurança de sessões
+# exemplo de chave secreta no codigo abaixo digite tudo junto em uma linha direto no cmd
+# python -c "import string as s;
+# from random import SystemRandom as sr;
+# print(''.join(sr().choices(s.ascii_letters + s.punctuation, k=64)))"
+
+# Tipo de sessão
+SESSION_TYPE = 'filesystem'  # Tipo de armazenamento de sessão

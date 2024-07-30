@@ -13,4 +13,3 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 from app.controllers import default
-

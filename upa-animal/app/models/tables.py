@@ -6,6 +6,7 @@ from flask_login import UserMixin
 
 Base = declarative_base()
 
+
 class User(db.Model, UserMixin):
     __tablename__= "administradores"
 
@@ -24,6 +25,7 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return f"<USER {self.nome_de_usuario}>"
+
 
 class Tutor(db.Model):
     __tablename__ = "tutor"
@@ -45,8 +47,8 @@ class Tutor(db.Model):
 
     def __repr__(self):
         return f'<tutor {self.id}>'
-    
-    
+
+
 class Animal(db.Model):
     __tablename__ = "animal"
     animal_id = db.Column(Integer, primary_key=True)
@@ -56,9 +58,9 @@ class Animal(db.Model):
     sexo = db.Column(String(10))
     especie = db.Column(String(50))
 
-    #chave estrangeira
+    # chave estrangeira
     id_tutor = db.Column(Integer, ForeignKey("tutor.id"))
-    #relacionamento
+    # relacionamento
     tutor = relationship("Tutor", backref="animais")
 
     @validates('sexo')
@@ -78,7 +80,7 @@ class Animal(db.Model):
         self.peso_aproximado = peso_aproximado
         self.idade_aproximado = idade_aproximado
         self.sexo = sexo
-        self.id_tutor = id_tutor    
+        self.id_tutor = id_tutor
         self.especie = especie
 
     def __repr__(self):

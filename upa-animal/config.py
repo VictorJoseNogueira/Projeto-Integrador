@@ -1,16 +1,18 @@
-DEBUG = True
+import os
+
+DEBUG = os.environ.get("DEBUG")
 # Configurações do MySQL
-MYSQL_DATABASE_PORT = "3306"
-MYSQL_DATABASE = "centro_de_protecao_animal"
-MYSQL_HOST = "35.205.129.181"
-MYSQL_USER = "root"
-MYSQL_PASSWORD = "admin"
+MYSQL_DATABASE_PORT = os.environ.get("MYSQL_DATABASE_PORT")
+MYSQL_DATABASE = os.environ.get("MYSQL_DATABASE")
+MYSQL_HOST = os.environ.get("MYSQL_HOST")
+MYSQL_USER = os.environ.get("MYSQL_USER")
+MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD")
 
-SQLALCHEMY_DATABASE_URI = 'mysql://root:admin@35.205.129.181/centro_de_protecao_animal'  # noqa E501
+SQLALCHEMY_DATABASE_URI = os.environ.get("SQLALCHEMY_DATABASE_URI")  # noqa E501
 
-SQLALCHEMY_TRACK_MODIFICATIONS = True
+SQLALCHEMY_TRACK_MODIFICATIONS = os.environ.get("SQLALCHEMY_TRACK_MODIFICATIONS")  # noqa E501
 
-SECRET_KEY = 'CPAUNIVESP'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 
-SESSION_TYPE = 'filesystem'
+SESSION_TYPE = os.environ.get("SESSION_TYPE")

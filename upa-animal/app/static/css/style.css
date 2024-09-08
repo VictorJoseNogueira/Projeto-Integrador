@@ -336,3 +336,53 @@ border: 20px;
   background-color: #f8d7da;
   border-color: #f5c6cb;
 }
+
+.animal-detail-page {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.label-animal-detail-page {
+    margin-top: 10px;
+}
+
+
+
+.btn-animal-detail-page {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3a9ca5;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2a7a85;
+}
+
+.section{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.section-left{
+  width: 40%;
+}
+.section-right{
+ 
+  width: 70%;
+}
+.animal-page-content{
+  text-align: center; 
+  padding: 10%; 
+  box-sizing: border-box;
+}
+
+.animal-page-content textarea {
+  display: block; 
+  margin: 0 auto; 
+  resize: none;
+}

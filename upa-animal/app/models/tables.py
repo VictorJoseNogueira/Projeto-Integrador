@@ -19,6 +19,7 @@ class User(db.Model, UserMixin):
         self.nome = nome
         self.email = email
         self.senha = senha
+
     def is_active(self):
         print("Método is_active foi chamado.")
         return True

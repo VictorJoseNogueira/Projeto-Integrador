@@ -137,7 +137,7 @@ def logout():
 
 
 
-@app.route('/remover_tutor/<int:info>', methods=['POST'])
+@app.route('/remover-tutor/<int:info>', methods=['POST'])
 @login_required
 def remover_tutor(info):
     tutor = Tutor.query.get_or_404(info)
@@ -145,3 +145,9 @@ def remover_tutor(info):
     db.session.commit()
     flash('Tutor foi removido com sucesso.', 'success')
     return redirect(url_for('index'))  # Redirecione para a rota que deseja, por exemplo 'index'
+
+
+@app.route('/detalhe-animal')
+@login_required
+def show_animal_detail():
+    return render_template('animal_detail_page.html')

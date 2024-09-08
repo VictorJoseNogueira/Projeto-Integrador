@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import  PasswordField,BooleanField, EmailField, StringField,IntegerField, FloatField,SelectField,TextAreaField
+from wtforms import PasswordField, BooleanField, EmailField, StringField, IntegerField, FloatField, SelectField, TextAreaField
 from wtforms.validators import DataRequired
+
 
 class LoginForm(FlaskForm):
     email = EmailField('email', validators=[DataRequired()])
@@ -13,13 +14,13 @@ class Cadastro(FlaskForm):
     email = EmailField('email', validators=[DataRequired()])
     senha = PasswordField('senha', validators=[DataRequired()])
 
+
 class cadastrar_tutor(FlaskForm):
     nome = StringField('nome', validators=[DataRequired()])
     cpf = StringField('cpf', validators=[DataRequired()])
     tel = StringField('tel', validators=[DataRequired()])
     endereco = StringField('endereco', validators=[DataRequired()])
 
-    
 
 class cadastrar_animal(FlaskForm):
     nome_animal = StringField('nome', validators=[DataRequired()])

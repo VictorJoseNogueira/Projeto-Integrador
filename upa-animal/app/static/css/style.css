@@ -386,3 +386,7 @@ button:hover {
   margin: 0 auto; 
   resize: none;
 }
+
+.no-resize{
+  resize: none;
+}

@@ -58,10 +58,10 @@
         <tbody>
             {% for animal in animais %}
             <tr>
-                <td>{{ animal.animal_id }}</td>
-                <td>{{ animal.nome }}</td>
+                <td>{{ animal.animal_id }}</a></td>
+                <td><a href="{{ url_for('show_animal_detail', info=tutor.id, info_animal_id=animal.animal_id) }}">{{ animal.nome }}</a></td>
                 <td>{{ animal.peso_aproximado }}</td>
-                <td>{{ animal.sexo }}</td>
+                <td>{{ animal.sexo }}</a></td>
                 <td>{{ animal.idade_aproximado }}</td>
                 <td>{{ animal.especie }}</td>
                 

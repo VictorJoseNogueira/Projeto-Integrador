@@ -1,7 +1,7 @@
 from app import app, db, login_manager
-from flask import render_template, url_for, redirect, request, session, flash
-from app.models.tables import User, Tutor, Animal
-from app.models.form import LoginForm, Cadastro, cadastrar_animal, cadastrar_tutor
+from flask import render_template, url_for, redirect, request, session, flash, abort  # noqa E501
+from app.models.tables import User, Tutor, Animal, Consulta
+from app.models.form import LoginForm, Cadastro, cadastrar_animal, cadastrar_tutor, Cadastrar_Consulta  # noqa E501
 from flask_login import login_user, login_required, logout_user
 from werkzeug.exceptions import Unauthorized
 
@@ -18,12 +18,13 @@ def index():
     search = request.args.get('search')
     if search:
         tutores = Tutor.query.filter(
-            (Tutor.nome.ilike(f'%{search}%')) | (Tutor.cpf.ilike(f'%{search}%')),
-            Tutor.deleted == False
+            (Tutor.nome.ilike(f'%{search}%')) | (Tutor.cpf.ilike(f'%{search}%')),  # noqa E501
+            Tutor.deleted == False  # noqa
         ).all()
     else:
-        tutores = Tutor.query.filter_by(deleted=False).order_by(Tutor.id.desc()).limit(10).all()
+        tutores = Tutor.query.filter_by(deleted=False).order_by(Tutor.id.desc()).limit(10).all()  # noqa E501
     return render_template('index.html', tutores=tutores)
+
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
@@ -46,7 +47,7 @@ def tutor(info):
     form = cadastrar_tutor()
     try:
         if form.validate_on_submit():
-            novo_tutor = Tutor(nome=form.nome.data, cpf=form.cpf.data, tel=form.tel.data, endereco=form.endereco.data)
+            novo_tutor = Tutor(nome=form.nome.data, cpf=form.cpf.data, tel=form.tel.data, endereco=form.endereco.data)  # noqa E501
             db.session.add(novo_tutor)
             db.session.commit()
             id_tutor = novo_tutor.id
@@ -62,7 +63,7 @@ def tutor(info):
 def cadastro(info):
     cadastro_form = Cadastro()
     if cadastro_form.validate_on_submit():
-        novo_usuario = User(nome=cadastro_form.nome.data, email=cadastro_form.email.data, senha=cadastro_form.senha.data)
+        novo_usuario = User(nome=cadastro_form.nome.data, email=cadastro_form.email.data, senha=cadastro_form.senha.data)  # noqa E501
         db.session.add(novo_usuario)
         db.session.commit()
         return redirect(url_for('index'))
@@ -80,7 +81,7 @@ def animais():
 @login_required
 def cad_animal(id_tutor):
     id_tutor = request.form.get('id_tutor')
-    return render_template(cadastramento_animal)
+    return render_template(cadastramento_animal, id_tutor=id_tutor)
 
 
 @app.route('/detalhe/<int:info>')
@@ -107,9 +108,9 @@ def cadastramento_animal(info):
             db.session.add(novo_animal)
             db.session.commit()
             return redirect(url_for('index'))
-    except Exception as e:
+    except Exception as e:  # noqa
         return render_template('erro.html')
-    return render_template('animal_cadastro.html', info=tutor_id, cadastro_animal=cadastro_animal)
+    return render_template('animal_cadastro.html', info=tutor_id, cadastro_animal=cadastro_animal)  # noqa E501
 
 
 @app.errorhandler(404)
@@ -136,7 +137,6 @@ def logout():
     return redirect(url_for('login'))
 
 
-
 @app.route('/remover-tutor/<int:info>', methods=['POST'])
 @login_required
 def remover_tutor(info):
@@ -144,10 +144,22 @@ def remover_tutor(info):
     tutor.deleted = True
     db.session.commit()
     flash('Tutor foi removido com sucesso.', 'success')
-    return redirect(url_for('index'))  # Redirecione para a rota que deseja, por exemplo 'index'
+    return redirect(url_for('index'))  # Redirecione para a rota que deseja, por exemplo 'index'  # noqa E501
 
 
-@app.route('/detalhe-animal')
+@app.route('/detalhe-animal/<int:info>/<int:info_animal_id>')
 @login_required
-def show_animal_detail():
-    return render_template('animal_detail_page.html')
+def show_animal_detail(info, info_animal_id):
+    tutor = Tutor.query.get(info)
+    if not tutor:
+        abort(404, description="Tutor não encontrado")
+
+    # Filtrando pelo ID do animal específico
+    animal = Animal.query.filter_by(id_tutor=info, animal_id=info_animal_id).first()  # noqa E501
+    if not animal:
+        abort(404, description="Animal não encontrado")
+
+    # Consultas relacionadas ao animal
+    consulta = Consulta.query.filter(Consulta.id_tutor == info, Consulta.id_animal == info_animal_id).all()  # noqa E501
+
+    return render_template('animal_detail_page.html', tutor=tutor, animal=animal, consulta=consulta)  # noqa E501

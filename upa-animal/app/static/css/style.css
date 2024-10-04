@@ -94,7 +94,7 @@ margin-right: 1%;}
 .btn-color{
   background-color: var(--verde-escuro);
   border: none;
-  font-size: 20px;
+  font-size: 1.25rem;
   transition: background-color 0.7s ease;}
 
 .btn-color:hover{

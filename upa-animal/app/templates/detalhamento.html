@@ -134,22 +134,22 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form method="POST" action="#">
                     <div class="mb-3">
                         <label for="nome" class="form-label">Nome</label>
-                        <input type="text" class="form-control" id="nome" name="nome" required>
+                        <input type="text" class="form-control" id="nome" name="nome" value="{{tutor.nome}}" required>
                     </div>
                     <div class="mb-3">
                         <label for="cpf" class="form-label">CPF</label>
-                        <input type="text" class="form-control" id="cpf" name="cpf" required>
+                        <input type="text" class="form-control" id="cpf" name="cpf" value="{{tutor.cpf}}" required>
                     </div>
                     <div class="mb-3">
                         <label for="tel" class="form-label">Telefone</label>
-                        <input type="text" class="form-control" id="tel" name="tel" required>
+                        <input type="text" class="form-control" id="tel" name="tel" value="{{tutor.tel}}" required>
                     </div>
                     <div class="mb-3">
                         <label for="endereco" class="form-label">Endereço</label>
-                        <input type="text" class="form-control" id="endereco" name="endereco" required>
+                        <input type="text" class="form-control" id="endereco" name="endereco" value="{{tutor.endereco}}" required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>

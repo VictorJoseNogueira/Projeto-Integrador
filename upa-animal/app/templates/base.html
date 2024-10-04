@@ -19,26 +19,8 @@
     <title>Centro de Proteção Animal {% block title %}{% endblock title %}</title>
 </head>
 <body class="background-default">
-
-    <div class="container-header">
- 
-        
-        <div class="container-header-button">
-            
-            <ul class="ul-header">
-                <li class="img-btn"><a href="{{url_for('index')}}"><img src="{{url_for('static', filename="img/btn-color-centro-protecao-animal-logo-150.png")}}" alt="botão de logo"></a>
-                </li>
-                <li><a href="#" class="btn btn-primary btn-color">Castração</a></li>
-                <li><a href="{{url_for('animais')}}" class="btn btn-primary btn-color">animais</a></li>
-                <li><a href="{{ url_for('cadastro') }}" class="btn btn-primary btn-color">Cadastrar novo usuario </a></li>
-                 {% if request.path != url_for('login') %}
-                 <li><a href="{{ url_for('login') }}" class="btn btn-primary btn-color">Logout</a></li>
-                {% endif %}
-            </ul>
-            
-        </div>
-          </div>
-    </div>
+    {% include 'header.html' %}
+    {% include 'menu_lateral.html' %}
 
     {% block content %}{% endblock content %}
     

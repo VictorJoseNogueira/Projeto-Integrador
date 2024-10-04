@@ -85,11 +85,23 @@ def cad_animal(id_tutor):
     return render_template(cadastramento_animal, id_tutor=id_tutor)
 
 
-@app.route('/detalhe/<int:info>')
+@app.route('/detalhe/<int:info>', methods=['GET', 'POST'])
 @login_required
 def detalhamento(info):
     tutor = Tutor.query.get(info)
     animais = Animal.query.filter_by(id_tutor=info).all()
+
+    if request.method == "POST" and "nome" in request.form:  # noqa E501
+        tutor.nome = request.form['nome']
+        tutor.cpf = request.form['cpf']
+        tutor.tel = request.form['tel']
+        tutor.endereco = request.form['endereco']
+    try:
+        db.session.commit()
+    except Exception as e:
+        print("Erro ao atualizar o Tutor:", e)
+        db.session.rollback()  # Rollback caso ocorra um erro
+
     return render_template('detalhamento.html', tutor=tutor, animais=animais)
 
 
@@ -162,10 +174,10 @@ def show_animal_detail(info, info_animal_id):
     # Consultas relacionadas ao animal
     consulta = Consulta.query.filter(Consulta.id_tutor == info, Consulta.id_animal == info_animal_id).all()  # noqa E501
     cad_consulta = Cadastrar_Consulta()
-    
+
     # Pegando a data atual no formato correto para MySQL
     data_atual = datetime.now()
-    data_formatada = data_atual.strftime("%Y-%m-%d %H:%M:%S")  # Formato compatível com MySQL
+    data_formatada = data_atual.strftime("%Y-%m-%d %H:%M:%S")  # Formato compatível com MySQL  # noqa E501
 
     # Atribuindo manualmente os valores de id_tutor, id_animal e data
     cad_consulta.id_tutor = info
@@ -183,7 +195,7 @@ def show_animal_detail(info, info_animal_id):
                 procedimento=cad_consulta.procedimento.data,
                 medicacao=cad_consulta.medicacao.data,
                 observacao=cad_consulta.observacao.data,
-                data=data_formatada  # Agora no formato correto para o banco de dados
+                data=data_formatada  # Agora no formato correto para o banco de dados  # noqa E501
             )
             db.session.add(nova_consulta)
             db.session.commit()
@@ -193,9 +205,9 @@ def show_animal_detail(info, info_animal_id):
     except Exception as e:
         print("Erro ao salvar a consulta:", e)
         return render_template('erro.html')
-    
-    
-    if request.method == 'POST' and 'nomeAnimal' in request.form:
+
+
+    if request.method == 'POST' and 'nomeAnimal' in request.form:  # noqa E501
         animal.nome = request.form['nomeAnimal']
         animal.peso_aproximado = request.form['pesoAnimal']
         animal.idade_aproximado = request.form['idadeAnimal']
@@ -204,7 +216,7 @@ def show_animal_detail(info, info_animal_id):
 
         try:
             db.session.commit()
-            return redirect(url_for('show_animal_detail', info=info, info_animal_id=info_animal_id))
+            return redirect(url_for('show_animal_detail', info=info, info_animal_id=info_animal_id))  # noqa E501
         except Exception as e:
             print("Erro ao atualizar o animal:", e)
             db.session.rollback()  # Rollback caso ocorra um erro

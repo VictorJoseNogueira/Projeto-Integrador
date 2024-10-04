@@ -32,9 +32,7 @@ class cadastrar_animal(FlaskForm):
 
 
 class Cadastrar_Consulta(FlaskForm):
-    id_consulta = IntegerField('ID Consulta', validators=[DataRequired()])
-    id_tutor = IntegerField('ID Tutor', validators=[DataRequired()])
-    id_animal = IntegerField('ID Animal', validators=[DataRequired()])
+
     veterinario = StringField('Veterinário', validators=[DataRequired()])
     sintomas = TextAreaField('Sintomas', validators=[DataRequired()])
     procedimento = TextAreaField('Procedimento', validators=[DataRequired()])

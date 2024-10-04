@@ -47,6 +47,8 @@
                               <br>
                               <strong>Medicamentos</strong>: {{ cons.medicacao }}
                               <br>
+                              <strong>Observações</strong>: {{ cons.observacao }}
+                              <br>
                             </div>
                           </div>
                         </div>
@@ -77,7 +79,8 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-              <form action="/cadastrar-consulta" method="POST">
+            <form method="POST" action="{{ url_for('show_animal_detail', info=tutor.id, info_animal_id=animal.animal_id) }}">
+                {{ cad_consulta.hidden_tag() }}
                   <div class="mb-3">
                       <label for="veterinario" class="form-label">Veterinário</label>
                       <input type="text" class="form-control" id="veterinario" name="veterinario" required>
@@ -93,6 +96,10 @@
                   <div class="mb-3">
                       <label for="medicacao" class="form-label">Medicamentos</label>
                       <textarea type="text" class="form-control no-resize" id="medicacao" name="medicacao"></textarea>
+                  </div>
+                  <div class="mb-3">
+                      <label for="observacao" class="form-label">Observações</label>
+                      <textarea type="text" class="form-control no-resize" id="observacao" name="observacao"></textarea>
                   </div>
                   <button type="submit" class="btn btn-primary">Salvar</button>
               </form>
@@ -110,9 +117,11 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
 
-          <!-- Corpo do Modal -->
+          <!-- modal editar animal -->
           <div class="modal-body">
-              <form action="/editar-animal" method="POST">
+            <form method="POST" action="{{ url_for('show_animal_detail', info=tutor.id, info_animal_id=animal.animal_id) }}">
+     
+
                   <div class="mb-3">
                       <label for="nomeAnimal" class="form-label">Nome do Animal</label>
                       <input type="text" class="form-control" id="nomeAnimal" name="nomeAnimal" value="{{ animal.nome }}" required>

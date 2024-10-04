@@ -4,6 +4,7 @@ from app.models.tables import User, Tutor, Animal, Consulta
 from app.models.form import LoginForm, Cadastro, cadastrar_animal, cadastrar_tutor, Cadastrar_Consulta  # noqa E501
 from flask_login import login_user, login_required, logout_user
 from werkzeug.exceptions import Unauthorized
+from datetime import datetime
 
 
 @login_manager.user_loader
@@ -146,8 +147,7 @@ def remover_tutor(info):
     flash('Tutor foi removido com sucesso.', 'success')
     return redirect(url_for('index'))  # Redirecione para a rota que deseja, por exemplo 'index'  # noqa E501
 
-
-@app.route('/detalhe-animal/<int:info>/<int:info_animal_id>')
+@app.route('/detalhe-animal/<int:info>/<int:info_animal_id>', methods=['GET', 'POST'])  # noqa E501
 @login_required
 def show_animal_detail(info, info_animal_id):
     tutor = Tutor.query.get(info)
@@ -161,5 +161,54 @@ def show_animal_detail(info, info_animal_id):
 
     # Consultas relacionadas ao animal
     consulta = Consulta.query.filter(Consulta.id_tutor == info, Consulta.id_animal == info_animal_id).all()  # noqa E501
+    cad_consulta = Cadastrar_Consulta()
+    
+    # Pegando a data atual no formato correto para MySQL
+    data_atual = datetime.now()
+    data_formatada = data_atual.strftime("%Y-%m-%d %H:%M:%S")  # Formato compatível com MySQL
 
-    return render_template('animal_detail_page.html', tutor=tutor, animal=animal, consulta=consulta)  # noqa E501
+    # Atribuindo manualmente os valores de id_tutor, id_animal e data
+    cad_consulta.id_tutor = info
+    cad_consulta.id_animal = info_animal_id
+    cad_consulta.data.data = data_formatada
+
+    try:
+        if cad_consulta.validate_on_submit():
+            print("Formulário validado com sucesso.")
+            nova_consulta = Consulta(
+                id_animal=info_animal_id,
+                id_tutor=info,
+                veterinario=cad_consulta.veterinario.data,
+                sintomas=cad_consulta.sintomas.data,
+                procedimento=cad_consulta.procedimento.data,
+                medicacao=cad_consulta.medicacao.data,
+                observacao=cad_consulta.observacao.data,
+                data=data_formatada  # Agora no formato correto para o banco de dados
+            )
+            db.session.add(nova_consulta)
+            db.session.commit()
+            return redirect(url_for('show_animal_detail', info=info, info_animal_id=info_animal_id))  # noqa E501
+        else:
+            print("Formulário não validado:", cad_consulta.errors)
+    except Exception as e:
+        print("Erro ao salvar a consulta:", e)
+        return render_template('erro.html')
+    
+    
+    if request.method == 'POST' and 'nomeAnimal' in request.form:
+        animal.nome = request.form['nomeAnimal']
+        animal.peso_aproximado = request.form['pesoAnimal']
+        animal.idade_aproximado = request.form['idadeAnimal']
+        animal.especie = request.form['especieAnimal']
+        animal.sexo = request.form['sexoAnimal']
+
+        try:
+            db.session.commit()
+            return redirect(url_for('show_animal_detail', info=info, info_animal_id=info_animal_id))
+        except Exception as e:
+            print("Erro ao atualizar o animal:", e)
+            db.session.rollback()  # Rollback caso ocorra um erro
+
+
+
+    return render_template('animal_detail_page.html', tutor=tutor, animal=animal, consulta=consulta, cad_consulta=cad_consulta)  # noqa E501

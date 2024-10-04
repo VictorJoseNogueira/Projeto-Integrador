@@ -115,14 +115,51 @@
  
     
     <div class="float-btn btn-group custom-btn-group" role="group" aria-label="Basic example">
-        <a class="btn btn-primary btn-color" href="#">Editar tutor</a>
-        <form action="{{ url_for('remover_tutor', info=tutor.id) }}" method="post" style="display:inline;" onsubmit="return confirm('Você tem certeza que deseja remover este tutor?');">
+        <button class="btn btn-primary btn-color" data-bs-toggle="modal" data-bs-target="#editModal" 
+                onclick="populateModal('{{ tutor.nome }}', '{{ tutor.cpf }}', '{{ tutor.tel }}', '{{ tutor.endereco }}')">Editar tutor</button>
+        <form action="{{ url_for('remover_tutor', info=tutor.id) }}" method="post" style="display:inline;" 
+              onsubmit="return confirm('Você tem certeza que deseja remover este tutor?');">
             <button type="submit" class="btn btn-primary btn-color red">Remover Tutor</button>
         </form>
     </div>
     
 
 
+<!-- Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Editar Tutor</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome</label>
+                        <input type="text" class="form-control" id="nome" name="nome" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="cpf" class="form-label">CPF</label>
+                        <input type="text" class="form-control" id="cpf" name="cpf" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="tel" class="form-label">Telefone</label>
+                        <input type="text" class="form-control" id="tel" name="tel" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="endereco" class="form-label">Endereço</label>
+                        <input type="text" class="form-control" id="endereco" name="endereco" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary">Salvar alterações</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
     
 
 </div>

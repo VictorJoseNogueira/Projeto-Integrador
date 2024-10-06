@@ -1,14 +1,33 @@
 @charset "UTF-8";
 
 :root{
-  --azul-escuro: #21295C;
-  --cinza-azulado: #6A6F92;
-  --branco-acinzentado: #80ddddb7;
-  --ylmn-blue:#464c77;
-  --ultra-violet:#585E85;
-  --cool-gray:#9B9FB6;
-  --verde-escuro:#06363b; 
+  --blue-01: #21295C; /**/
+  --blue-02: #6A6F92; /*  */
+  --blue-03: #464c77; /*  */
+  --blue-04: #585E85; /*  */
+  --green-01: #80ddddb7; /* hover dos botoes e links */
+  --green-02: #06363b; /* cor do header e do container dos botoes */
+  --green-03: #3a9ca538; /* cor dos containers da pg inicial,de cadastro de usuario, de tutor */
+  --green-04: #227783; /* background da tabela */
+  --green-05: #3a9ca5c5; /* linhas impares da tabela */
+  --green-06: #3a9ca549; /*  */
+  --green-07: #3a9ca5; /*  */
+  --green-08: #2a7a85; /*  */
+  --green-09: #3a9ca5c5; /* container da tela de cadastro de novo tutor */
+  --gray-01: #9B9FB6; /*  */
+  --white-01: #ffffff; /*  */
+  --white-02: #dee2e6; /*  */
+  --white-03: #d4edda; /*  */
+  --white-04: #c3e6cb; /*  */
+  --black-01: #000000; /*  */
+  --font-color:#000000; /* cor dos links  */
+  --red-01:#AF0000; /* botao de remover tutor */
+  --red-02:#721c24; /* hover do botao de remover tutor */
 }
+/*
+.darkmode {
+}
+*/
 
 .container-global{
     
@@ -21,7 +40,7 @@
     padding-right: 50px;
     border-radius: 10px;
     text-align: center;
-    background-color: #3a9ca538;
+    background-color: var(--green-03); /* cor do container da tabela e pesquisa */
     overflow: hidden;
 
     }
@@ -57,7 +76,7 @@ overflow: hidden;}
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: #3a9ca538;
+    background-color: var(--green-03); /*cor do container de cadastro de novo user*/
     border-radius: 5%;
 }
 
@@ -65,19 +84,14 @@ overflow: hidden;}
 .container-login-form .form-floating {
     margin-bottom: 10px;}
 
-.btn-meu-css{
-    background-color: var(--cinza-azulado);
-    transition: background-color 0.3s ease;}
-    
-
 
 .container-header{
-  background-color: var(--verde-escuro);
+  background-color: var(--green-02); /* cor do header */
   margin: 0 auto;
   margin-top: 1%;
   max-width: 90%;
   padding: 2px;
-  color: white;
+  color: var(--white-01); /* cor das letras */
   text-align: center;
   border-radius: 15px;
   }
@@ -92,13 +106,13 @@ display: inline-block;
 margin-right: 1%;}
 
 .btn-color{
-  background-color: var(--verde-escuro);
+  background-color: var(--green-02); /* contorno dos botoes */
   border: none;
   font-size: 1.25rem;
   transition: background-color 0.7s ease;}
 
 .btn-color:hover{
-  background-color: var(--branco-acinzentado);
+  background-color: var(--green-01); /* hover dos botoes */
 }
 
 body{
@@ -115,16 +129,8 @@ body{
 .background-login{
   background-image:  url('../img/wallpapers-no-shape.png');
 }
-.check-color{
-  color: white;}
 
-.container-login-contorno{
-margin: auto;
-border-radius: 30px;
-width: 450px;}
 
-.container-login-contorno h1{
-  color: white;}
 
 .table-container{
   padding-top: 3%;
@@ -139,11 +145,11 @@ width: 450px;}
 
 
 .table-color{
-  color: rgb(0, 0, 0);
-  background-color: rgb(34, 119, 131);
+  color: var(--font-color);
+  background-color: var(--green-04); /* background table */
   width: 100%;
   margin-bottom: 1rem;
-  border-color: transparent
+  border-color: transparent;
   }
 
 
@@ -157,7 +163,7 @@ width: 450px;}
 }
 
 .table-color.table-striped tbody tr:nth-of-type(odd) {
-  background-color: rgb(255, 255, 255);
+  background-color: var(--green-05); /* linhas impares da tabela */
 }
 
 .table-color > :not(caption) > * > * {
@@ -224,19 +230,19 @@ border: 20px;
   padding-right: 50px;
   border-radius: 10px;
   text-align: center;
-  background-color: #3a9ca5c5;
+  background-color: var(--green-09);  /* container da tela de cadastro de novo tutor */
   overflow: hidden;
 
   }
 
   a{
     text-decoration: none;
-    color: black;
+    color: var(--font-color);  /* cor da fonte dos links */
     transition: color 0.5s ease;
   }
 
   a:hover{
-    color: var(--branco-acinzentado);
+    color: var(--green-01);  /* hover das cores da fonte dos links */
   }
 
 
@@ -251,7 +257,7 @@ border: 20px;
     padding-left: 20px;
     padding-right: 50px;
     border-radius: 10px;
-    background-color: #3a9ca549;
+    background-color: var(--green-03);  /* container dos detalhes do tutor */
 }
 
   .perfil-tutor{
@@ -277,7 +283,7 @@ border: 20px;
 
   .custom-navbar {
     background-color: transparent;
-    border: 1px solid #dee2e6;
+    border: 1px solid var(--white-02);
     border-radius: 10px;
     width: 100%;
     padding: 10px;
@@ -305,7 +311,13 @@ border: 20px;
 }
 
 .red {
-  background-color: rgb(175, 0, 0);
+  background-color: var(--red-01);  /* do botao de remover tutor */
+  transition: 300ms ease-in-out;
+}
+
+.red:hover{
+  background-color: var(--red-02);  /* hover do botao de remover tutor */
+
 }
 
 .float-btn {
@@ -326,15 +338,15 @@ border: 20px;
 }
 
 .alert-success {
-  color: #721c24;
-  background-color: #d4edda;
-  border-color: #c3e6cb;
+  color: var(--green-05);  /* msg de sucesso */
+  background-color: var(--white-03);
+  border-color: var(--white-04);
 }
 
 .alert-danger {
-  color: #721c24;
-  background-color: #f8d7da;
-  border-color: #f5c6cb;
+  color: var(--red-02); /* msg de alerta  */
+  background-color: var(--white-03);
+  border-color: var(--white-04);
 }
 
 .animal-detail-page {
@@ -345,22 +357,6 @@ border: 20px;
 
 .label-animal-detail-page {
     margin-top: 10px;
-}
-
-
-
-.btn-animal-detail-page {
-    margin-top: 15px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #3a9ca5;
-    color: white;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #2a7a85;
 }
 
 .section{

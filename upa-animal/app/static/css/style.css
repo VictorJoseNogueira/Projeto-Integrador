@@ -1,33 +1,37 @@
 @charset "UTF-8";
 
 :root{
-  --blue-01: #21295C; /**/
-  --blue-02: #6A6F92; /*  */
-  --blue-03: #464c77; /*  */
-  --blue-04: #585E85; /*  */
   --green-01: #80ddddb7; /* hover dos botoes e links */
   --green-02: #06363b; /* cor do header e do container dos botoes */
   --green-03: #3a9ca538; /* cor dos containers da pg inicial,de cadastro de usuario, de tutor */
   --green-04: #227783; /* background da tabela */
   --green-05: #3a9ca5c5; /* linhas impares da tabela */
-  --green-06: #3a9ca549; /*  */
-  --green-07: #3a9ca5; /*  */
-  --green-08: #2a7a85; /*  */
-  --green-09: #3a9ca5c5; /* container da tela de cadastro de novo tutor */
-  --gray-01: #9B9FB6; /*  */
+  --green-06: #3a9ca5c5; /* container da tela de cadastro de novo tutor */
   --white-01: #ffffff; /*  */
-  --white-02: #dee2e6; /*  */
-  --white-03: #d4edda; /*  */
-  --white-04: #c3e6cb; /*  */
   --black-01: #000000; /*  */
   --font-color:#000000; /* cor dos links  */
   --red-01:#AF0000; /* botao de remover tutor */
   --red-02:#721c24; /* hover do botao de remover tutor */
+  --background-img:url('../img/animal-land.png')
 }
-/*
+
 .darkmode {
+  --green-01: #4f8888b7; /* hover dos botões e links em modo escuro */
+  --green-02: #042c2f; /* cor do header e do container dos botões em modo escuro */
+  --green-03: #2b7d7d38; /* cor dos containers em modo escuro */
+  --green-04: #184e53; /* background da tabela em modo escuro */
+  --green-05: #2b7d7dc5; /* linhas ímpares da tabela em modo escuro */
+  --green-06: #2b7d7dc5; /* container da tela de cadastro de novo tutor em modo escuro */
+  --white-01: #e0e0e0; /* branco para elementos como textos e ícones */
+  --black-01: #121212; /* cor de fundo principal em modo escuro */
+  --font-color: #e0e0e0; /* cor dos links em modo escuro */
+  --red-01: #FF6666; /* botao de remover tutor em modo escuro */
+  --red-02: #992222; /* hover do botao de remover tutor em modo escuro */
+  --background-img:url('../img/animal-land-darkner.png');
+  background-color: #145252;
+
 }
-*/
+
 
 .container-global{
     
@@ -123,7 +127,7 @@ body{
 }
 
 .background-default{
-  background-image:  url('../img/animal-land.png');
+  background-image:  var(--background-img);
 }
 
 .background-login{
@@ -230,7 +234,7 @@ border: 20px;
   padding-right: 50px;
   border-radius: 10px;
   text-align: center;
-  background-color: var(--green-09);  /* container da tela de cadastro de novo tutor */
+  background-color: var(--green-06);  /* container da tela de cadastro de novo tutor */
   overflow: hidden;
 
   }
@@ -283,12 +287,13 @@ border: 20px;
 
   .custom-navbar {
     background-color: transparent;
-    border: 1px solid var(--white-02);
     border-radius: 10px;
     width: 100%;
     padding: 10px;
 }
-
+.nav-bar-color{
+  background-color: #000000;
+}
 .custom-form {
     width: 100%;
     display: flex;
@@ -339,14 +344,14 @@ border: 20px;
 
 .alert-success {
   color: var(--green-05);  /* msg de sucesso */
-  background-color: var(--white-03);
+  background-color: var(--white-01);
   border-color: var(--white-04);
 }
 
 .alert-danger {
   color: var(--red-02); /* msg de alerta  */
-  background-color: var(--white-03);
-  border-color: var(--white-04);
+  background-color: var(--white-01);
+  border-color: var(--white-01);
 }
 
 .animal-detail-page {
@@ -385,4 +390,8 @@ border: 20px;
 
 .no-resize{
   resize: none;
+}
+
+.color-text{
+  color: var(--font-color);
 }

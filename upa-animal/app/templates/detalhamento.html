@@ -42,7 +42,7 @@
 <div class="detalhamento-animal">
     <div class="detalhamento-animal">
         {% if animais %}
-            <table class="table">
+            <table class="table-color table-striped">
 
         <thead>
             <tr>
@@ -75,35 +75,39 @@
         <a href="{{ url_for('cadastramento_animal', info=tutor.id) }}" class="btn btn-primary btn-color">Cadastrar animais</a>
     </div>
         {% else %}
-        <table class="table-color">
+<div class="|">
+    
+            <table class="table-color table-striped">
+    
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nome</th>
+                        <th>Peso</th>
+                        <th>Sexo</th>
+                        <th>Idade</th>
+                        <th>Espécie</th>
+    
+                    </tr>
+                </thead>
+                <tbody>
+    
+                    <tr>
+                        <td>vazio</td>
+                        <td>vazio</td>
+                        <td>vazio</td>
+                        <td>vazio</td>
+                        <td>vazio</td>
+                        <td>vazio</td>
+    
+    
+                    </tr>
+    
+    
+                </tbody>
+            </table>
+</div>
 
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Nome</th>
-                    <th>Peso</th>
-                    <th>Sexo</th>
-                    <th>Idade</th>
-                    <th>Espécie</th>
-                    
-                </tr>
-            </thead>
-            <tbody>
-                
-                <tr>
-                    <td>vazio</td>
-                    <td>vazio</td>
-                    <td>vazio</td>
-                    <td>vazio</td>
-                    <td>vazio</td>
-                    <td>vazio</td>
-                    
-                    
-                </tr>
-                
-                
-            </tbody>
-        </table>
         <div class="centralize">
             <a href="{{ url_for('cadastramento_animal', info=tutor.id) }}" class="btn btn-primary btn-color">Cadastrar animais</a>
         </div>

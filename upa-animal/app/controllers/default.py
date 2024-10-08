@@ -23,12 +23,22 @@ def index():
     if search:
         tutores = Tutor.query.filter(
             (Tutor.nome.ilike(f'%{search}%')) | (Tutor.cpf.ilike(f'%{search}%')),  # noqa E501
-            Tutor.deleted == False  # noqa
+            Tutor.deleted == False
         ).paginate(page=page, per_page=per_page, error_out=False)
+
     else:
         tutores = Tutor.query.filter_by(deleted=False).order_by(Tutor.id.desc()).paginate(page=page, per_page=per_page, error_out=False)  # noqa E501
 
-    return render_template('index.html', tutores=tutores)
+    # Calcule o total de páginas
+    total_pages = (tutores.total // per_page) + (1 if tutores.total % per_page > 0 else 0)  # noqa E501
+
+    # Calcular limites de páginas para passar para o template
+    page_start = max(1, tutores.page - 1)
+    page_end = min(total_pages, tutores.page + 1)
+
+
+
+    return render_template('index.html', tutores=tutores, total_pages=total_pages, page_start=page_start, page_end=page_end)
 
 
 @app.route('/login/', methods=['GET', 'POST'])
@@ -78,8 +88,18 @@ def cadastro(info):
 @app.route('/animais/')
 @login_required
 def animais():
-    animals = Animal.query.all()
-    return render_template('info_animal.html', animals=animals)
+    page = request.args.get('page', 1, type=int)
+    per_page = 10
+    animals = Animal.query.paginate(page=page, per_page=per_page, error_out=False)  # Paginação diretamente aqui  # noqa E501
+    total_pages = animals.pages  # Total de páginas, que já é calculado pelo método paginate  # noqa E501
+
+    # Cálculo dos limites de páginas
+    page_start = 1 if animals.page <= 1 else animals.page - 1
+    page_end = total_pages if animals.page >= total_pages else animals.page + 1
+
+    return render_template('info_animal.html', animals=animals, total_pages=total_pages, page_start=page_start, page_end=page_end)  # noqa E501
+
+
 
 
 @app.route('/animal/<int:id_tutor>', methods=['GET', 'POST'])

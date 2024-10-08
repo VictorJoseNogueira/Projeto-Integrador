@@ -16,14 +16,15 @@
         
         <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
         <script type='text/javascript' src="{{ url_for('static', filename='js/darkmode.js') }}" defer ></script>
+        <script src="{{ url_for('static', filename='js/fontsize.js') }}"  ></script>
+
 
     <title>Centro de Proteção Animal {% block title %}{% endblock title %}</title>
 </head>
 <body class="background-default darkmode ">
+    
     {% include 'header.html' %}
     
-    {% include 'menu_lateral.html' %}
-
     {% block content %}{% endblock content %}
     
     

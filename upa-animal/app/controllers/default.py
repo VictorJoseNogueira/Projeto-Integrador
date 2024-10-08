@@ -17,13 +17,17 @@ def load_user(user_id):
 @login_required
 def index():
     search = request.args.get('search')
+    page = request.args.get('page', 1, type=int)
+    per_page = 10  # Número de itens por página
+
     if search:
         tutores = Tutor.query.filter(
             (Tutor.nome.ilike(f'%{search}%')) | (Tutor.cpf.ilike(f'%{search}%')),  # noqa E501
             Tutor.deleted == False  # noqa
-        ).all()
+        ).paginate(page=page, per_page=per_page, error_out=False)
     else:
-        tutores = Tutor.query.filter_by(deleted=False).order_by(Tutor.id.desc()).limit(10).all()  # noqa E501
+        tutores = Tutor.query.filter_by(deleted=False).order_by(Tutor.id.desc()).paginate(page=page, per_page=per_page, error_out=False)  # noqa E501
+
     return render_template('index.html', tutores=tutores)
 
 

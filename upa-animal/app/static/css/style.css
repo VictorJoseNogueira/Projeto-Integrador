@@ -12,7 +12,8 @@
   --font-color:#000000; /* cor dos links  */
   --red-01:#AF0000; /* botao de remover tutor */
   --red-02:#721c24; /* hover do botao de remover tutor */
-  --background-img:url('../img/animal-land.png')
+  --background-img:url('../img/animal-land.png');
+  --btn-image: url("app/static/img/dog-png.png");
 }
 
 .darkmode {
@@ -29,8 +30,52 @@
   --red-02: #992222; /* hover do botao de remover tutor em modo escuro */
   --background-img:url('../img/animal-land-darkner.png');
   background-color: #145252;
-
 }
+
+.darkmode-btn {
+  height: auto; /* O botão se ajusta ao conteúdo */
+  width: auto;  /* Deixe o botão se ajustar à largura da imagem */
+  padding: 0;   /* Remova qualquer preenchimento extra */
+  border: none; /* Opcional: para remover bordas */
+  background: none; /* Para não ter fundo, se desejado */
+  display: inline-block; /* Faz com que o botão se ajuste à imagem */
+  
+}
+
+.darkmode-btn img {
+  height: 90px; /* Ajusta a altura da imagem para 30px */
+  width: auto;  /* Mantém a proporção da imagem */
+}
+.darkmode .darkmode-btn img {
+  height: 90px; /* Ajusta a altura da imagem para 30px */
+  width: auto;  /* Mantém a proporção da imagem */
+}
+
+#theme-switch{
+  height: 80px;
+  width: 240px;
+  padding: 0;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 20px;
+  right: 30px;
+  
+}
+
+
+#theme-switch img:last-child{
+  display: none;
+}
+.darkmode #theme-switch img:first-child{
+  display: none;
+}
+.darkmode #theme-switch img:last-child{
+  display: block;
+}
+
 
 
 .container-global{
@@ -88,6 +133,22 @@ overflow: hidden;}
 .container-login-form .form-floating {
     margin-bottom: 10px;}
 
+.container-header-global{
+  display: flex;
+  align-items: center;
+}
+.container-header-global-right {
+  width: 92%;
+  display: inline-block;
+}
+
+.container-header-global-left {
+  width: 8%;
+  display: inline-block;
+  vertical-align: top; /* Alinha ambos os containers no topo */
+  margin:auto;
+}
+
 
 .container-header{
   background-color: var(--green-02); /* cor do header */
@@ -98,7 +159,9 @@ overflow: hidden;}
   color: var(--white-01); /* cor das letras */
   text-align: center;
   border-radius: 15px;
+  
   }
+  
 
 .ul-header{
 list-style: none;
@@ -113,7 +176,16 @@ margin-right: 1%;}
   background-color: var(--green-02); /* contorno dos botoes */
   border: none;
   font-size: 1.25rem;
-  transition: background-color 0.7s ease;}
+  transition: background-color 0.7s ease;
+}
+
+.btn-color-nav{
+  background-color: var(--green-05); /* contorno dos botoes */
+  border: none;
+  font-size: 1.25rem;
+  transition: background-color 0.7s ease;
+  color: var(--white-01);
+}
 
 .btn-color:hover{
   background-color: var(--green-01); /* hover dos botoes */

@@ -1,0 +1,20 @@
+<!-- Adicionar os links de paginação -->
+<nav aria-label="Page navigation">
+    <ul class="pagination  justify-content-center">
+        <li class="page-item  {% if not tutores.has_prev %}disabled{% endif %}">
+            <a class=" btn-color-nav page-link" href="{{ url_for('index', page=tutores.prev_num, search=search) }}">Inicio</a>
+        </li>
+        {% for page_num in tutores.iter_pages() %}
+            {% if page_num %}
+                <li class="page-item  {% if page_num == tutores.page %}active{% endif %}">
+                    <a class="page-link  btn-color-nav" href="{{ url_for('index', page=page_num, search=search) }}">{{ page_num }}</a>
+                </li>
+            {% else %}
+                <li class="page-item "><span class="page-link">...</span></li>
+            {% endif %}
+        {% endfor %}
+        <li class="page-item {% if not tutores.has_next %}disabled{% endif %}">
+            <a class="page-link btn-color-nav" href="{{ url_for('index', page=tutores.next_num, search=search) }}">Ultimo</a>
+        </li>
+    </ul>
+</nav>

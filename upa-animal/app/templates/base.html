@@ -15,11 +15,11 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         
         <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+        <script type='text/javascript' src="{{ url_for('static', filename='js/darkmode.js') }}" defer ></script>
 
     <title>Centro de Proteção Animal {% block title %}{% endblock title %}</title>
 </head>
 <body class="background-default darkmode ">
-    <button>Darkmode</button>
     {% include 'header.html' %}
     
     {% include 'menu_lateral.html' %}

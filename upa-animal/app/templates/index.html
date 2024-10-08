@@ -34,7 +34,6 @@
 
     <div class="table-container">
         <table class="table-color table-striped">
-
             <thead>
                 <tr>
                     <th>#</th>
@@ -45,7 +44,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for tutor in tutores %}
+                {% for tutor in tutores.items %}  <!-- Usar 'items' para acessar os tutores paginados -->
                 <tr>
                     <td>{{ tutor.id }}</td>
                     <td><a href="{{ url_for('detalhamento', info=tutor.id) }}">{{ tutor.nome }}</a></td>
@@ -57,8 +56,9 @@
             </tbody>
         </table>
     </div>
-</div>
-
+    
+    {% include "pagination.html" %}
+    
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {

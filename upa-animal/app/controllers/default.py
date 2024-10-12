@@ -2,7 +2,7 @@ from app import app, db, login_manager
 from flask import render_template, url_for, redirect, request, session, flash, abort  # noqa E501
 from app.models.tables import User, Tutor, Animal, Consulta
 from app.models.form import LoginForm, Cadastro, cadastrar_animal, cadastrar_tutor, Cadastrar_Consulta  # noqa E501
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user  # type: ignore
 from werkzeug.exceptions import Unauthorized
 from datetime import datetime
 
@@ -23,7 +23,7 @@ def index():
     if search:
         tutores = Tutor.query.filter(
             (Tutor.nome.ilike(f'%{search}%')) | (Tutor.cpf.ilike(f'%{search}%')),  # noqa E501
-            Tutor.deleted == False
+            Tutor.deleted == False   # noqa
         ).paginate(page=page, per_page=per_page, error_out=False)
 
     else:
@@ -80,7 +80,7 @@ def cadastro(info):
         db.session.add(novo_usuario)
         db.session.commit()
         return redirect(url_for('index'))
-    return render_template('partials/register_admin.html', cadastro=cadastro_form)
+    return render_template('partials/register_admin.html', cadastro=cadastro_form)  # noqa E501
 
 
 @app.route('/animais/')
@@ -122,7 +122,7 @@ def detalhamento(info):
         print("Erro ao atualizar o Tutor:", e)
         db.session.rollback()  # Rollback caso ocorra um erro
 
-    return render_template('/partials/tutor_animal_details.html', tutor=tutor, animais=animais)
+    return render_template('/partials/tutor_animal_details.html', tutor=tutor, animais=animais)  # noqa E501
 
 
 @app.route('/detalhe/cadastro/<int:info>', methods=['GET', 'POST'])
@@ -148,7 +148,7 @@ def cadastramento_animal(info):
 
 @app.errorhandler(404)
 def page_not_found(error):
-    return render_template('partials/error_page.html', e='Página não encontrada'), 404
+    return render_template('partials/error_page.html', e='Página não encontrada'), 404  # noqa E501
 
 
 @app.errorhandler(500)

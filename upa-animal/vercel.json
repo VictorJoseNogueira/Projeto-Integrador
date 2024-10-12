@@ -7,3 +7,4 @@
     { "src": "/(.*)", "dest": "run.py" }
   ]
 }
+{ "rewrites": [{ "source": "/(.*)", "destination": "/" }] }

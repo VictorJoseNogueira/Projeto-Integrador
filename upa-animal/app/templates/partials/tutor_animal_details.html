@@ -2,6 +2,10 @@
 detalhamento: Mostra os dados do tutor e os animais sob sua responsabilidade. Exibe as informações pessoais do tutor e a lista de animais cadastrados a ele.
 -->
 {% extends "global/layout_base.html" %}
+{% block title %}
+Detalhes do {{tutor.nome}}
+ - 
+{% endblock title %}
 
 
 {% block content %}
@@ -9,7 +13,7 @@ detalhamento: Mostra os dados do tutor e os animais sob sua responsabilidade. Ex
 <div class="container-global-grid">
     <div class="perfil-tutor">
 
-            
+           
 <h1 class='font-color'>
     {{ tutor.nome}} 
 </h1>

@@ -1,11 +1,15 @@
 <!-- 
 base: Esta é a base de todas as telas. Contém o layout comum e os elementos compartilhados, como cabeçalho e rodapé.
 -->
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
 {% include "partials/head.html" %}
 <body class="background-default darkmode ">
-    
-    {% include 'partials/header.html' %}
+    <head>
+        {% include 'partials/header.html' %}
+        <title>{% block title %}{% endblock title %}Centro de Proteção Animal </title>
+</head>
     
     {% block content %}{% endblock content %}
     

@@ -88,7 +88,7 @@ def cadastro(info):
 def animais():
     page = request.args.get('page', 1, type=int)
     per_page = 10
-    animals = Animal.query.paginate(page=page, per_page=per_page, error_out=False)  # Paginação diretamente aqui  # noqa E501
+    animals = Animal.query.order_by(Animal.animal_id.desc()).paginate(page=page, per_page=per_page, error_out=False)  # Paginação diretamente aqui  # noqa E501
     total_pages = animals.pages  # Total de páginas, que já é calculado pelo método paginate  # noqa E501
 
     # Cálculo dos limites de páginas

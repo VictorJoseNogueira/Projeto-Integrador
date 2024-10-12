@@ -36,9 +36,7 @@ def index():
     page_start = max(1, tutores.page - 1)
     page_end = min(total_pages, tutores.page + 1)
 
-
-
-    return render_template('index.html', tutores=tutores, total_pages=total_pages, page_start=page_start, page_end=page_end)
+    return render_template('partials/index.html', tutores=tutores, total_pages=total_pages, page_start=page_start, page_end=page_end)  # noqa E501
 
 
 @app.route('/login/', methods=['GET', 'POST'])
@@ -52,7 +50,7 @@ def login():
             print("User logged in:", user.id)
 
             return redirect(url_for('index'))
-    return render_template("login.html", login=login)
+    return render_template("partials/login.html", login=login)
 
 
 @app.route('/tutor/<info>')
@@ -69,7 +67,7 @@ def tutor(info):
             return redirect(url_for('cadastramento_animal', info=id_tutor))
     except Exception as e:
         return f"Erro ao cadastrar: {e}"
-    return render_template('tutor.html', tutores=form)
+    return render_template('partials/register_tutor.html', tutores=form)
 
 
 @app.route("/cadastro/<info>")
@@ -82,7 +80,7 @@ def cadastro(info):
         db.session.add(novo_usuario)
         db.session.commit()
         return redirect(url_for('index'))
-    return render_template('cadastro.html', cadastro=cadastro_form)
+    return render_template('partials/register_admin.html', cadastro=cadastro_form)
 
 
 @app.route('/animais/')
@@ -97,9 +95,7 @@ def animais():
     page_start = 1 if animals.page <= 1 else animals.page - 1
     page_end = total_pages if animals.page >= total_pages else animals.page + 1
 
-    return render_template('info_animal.html', animals=animals, total_pages=total_pages, page_start=page_start, page_end=page_end)  # noqa E501
-
-
+    return render_template('partials/animal_list.html', animals=animals, total_pages=total_pages, page_start=page_start, page_end=page_end)  # noqa E501
 
 
 @app.route('/animal/<int:id_tutor>', methods=['GET', 'POST'])
@@ -126,7 +122,7 @@ def detalhamento(info):
         print("Erro ao atualizar o Tutor:", e)
         db.session.rollback()  # Rollback caso ocorra um erro
 
-    return render_template('detalhamento.html', tutor=tutor, animais=animais)
+    return render_template('/partials/tutor_animal_details.html', tutor=tutor, animais=animais)
 
 
 @app.route('/detalhe/cadastro/<int:info>', methods=['GET', 'POST'])
@@ -146,13 +142,13 @@ def cadastramento_animal(info):
             db.session.commit()
             return redirect(url_for('index'))
     except Exception as e:  # noqa
-        return render_template('erro.html')
-    return render_template('animal_cadastro.html', info=tutor_id, cadastro_animal=cadastro_animal)  # noqa E501
+        return render_template('partials/error_page.html')
+    return render_template('partials/register_animal.html', info=tutor_id, cadastro_animal=cadastro_animal)  # noqa E501
 
 
 @app.errorhandler(404)
 def page_not_found(error):
-    return render_template('erro.html', e='Página não encontrada'), 404
+    return render_template('partials/error_page.html', e='Página não encontrada'), 404
 
 
 @app.errorhandler(500)
@@ -228,7 +224,7 @@ def show_animal_detail(info, info_animal_id):
             print("Formulário não validado:", cad_consulta.errors)
     except Exception as e:
         print("Erro ao salvar a consulta:", e)
-        return render_template('erro.html')
+        return render_template('partials/error_page.html')
 
 
     if request.method == 'POST' and 'nomeAnimal' in request.form:  # noqa E501
@@ -247,4 +243,4 @@ def show_animal_detail(info, info_animal_id):
 
 
 
-    return render_template('animal_detail_page.html', tutor=tutor, animal=animal, consulta=consulta, cad_consulta=cad_consulta)  # noqa E501
+    return render_template('partials/animal_details.html', tutor=tutor, animal=animal, consulta=consulta, cad_consulta=cad_consulta)  # noqa E501

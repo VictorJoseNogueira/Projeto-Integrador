@@ -13,7 +13,6 @@
   --red-01:#AF0000; /* botao de remover tutor */
   --red-02:#721c24; /* hover do botao de remover tutor */
   --background-img:url('../img/animal-land.png');
-  --btn-image: url("app/static/img/dog-png.png");
 }
 
 .darkmode {
@@ -498,5 +497,14 @@ border: 20px;
 }
 
 .color-text{
+  color: var(--font-color);
+}
+
+
+.deletes{
+  background-image: url(../img/animal-land-pb.png) ;
+}
+
+.font-color{
   color: var(--font-color);
 }

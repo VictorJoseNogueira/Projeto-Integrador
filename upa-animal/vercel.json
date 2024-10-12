@@ -1,5 +1,5 @@
 {
   "rewrites": [
-    { "source": "/(.*)", "destination": "UPA-ANIMAL/app/index" }
+    { "source": "/(.*)", "destination": "/app/index" }
   ]
 }

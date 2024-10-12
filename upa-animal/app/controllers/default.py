@@ -16,8 +16,7 @@ def load_user(user_id):
 @app.route("/index/")
 @login_required
 def index():
-    return render_template('teste.html')
-"""    search = request.args.get('search')
+    search = request.args.get('search')
     page = request.args.get('page', 1, type=int)
     per_page = 10  # Número de itens por página
 
@@ -37,7 +36,8 @@ def index():
     page_start = max(1, tutores.page - 1)
     page_end = min(total_pages, tutores.page + 1)
 
-    return render_template('partials/index.html', tutores=tutores, total_pages=total_pages, page_start=page_start, page_end=page_end)  # noqa E501"""
+    return render_template('partials/index.html', tutores=tutores, total_pages=total_pages, page_start=page_start, page_end=page_end)  # noqa E501
+
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():

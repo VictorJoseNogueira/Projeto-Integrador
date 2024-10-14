@@ -10,15 +10,10 @@ from datetime import datetime
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-"""@app.route('/')
-def hello_world():
-    tutores = Tutor.query.all()  # Pega todos os tutores não deletados
-    return render_template('teste.html', tutores=tutores)
-"""
+
 @app.errorhandler(500)
 def internal_error(error):
     return "500 error: {}".format(error), 500
-
 
 
 @app.route("/")
@@ -233,7 +228,7 @@ def show_animal_detail(info, info_animal_id):
             print("Formulário não validado:", cad_consulta.errors)
     except Exception as e:
         print("Erro ao salvar a consulta:", e)
-        return render_template('partials/error_page.html')
+        return render_template('partials/error_page.html', e=e)
 
 
     if request.method == 'POST' and 'nomeAnimal' in request.form:  # noqa E501

@@ -7,7 +7,7 @@ pagination: Implementa a paginação na página inicial. Permite ao usuário nav
             <a href="{{ url_for('index', page=1, search=search) }}">primeiro</a>
         </li>
         {% if page_start > 1 %}
-            <li class='page-item btn-color-nav-init-end'>...</li>
+            <li class='page-item btn-color-nav'>...</li>
         {% endif %}
         
         {% for page_num in range(page_start, page_end + 1) %}
@@ -17,7 +17,7 @@ pagination: Implementa a paginação na página inicial. Permite ao usuário nav
         {% endfor %}
         
         {% if page_end < total_pages %}
-            <li class='page-item btn-color-nav-init-end'>...</li>
+            <li class='page-item btn-color-nav'>...</li>
         {% endif %}
         
         <li class='page-item btn-color-nav-init-end'>

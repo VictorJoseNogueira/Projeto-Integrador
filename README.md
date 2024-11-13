@@ -28,5 +28,12 @@ As tecnologias utilizadas no desenvolvimento incluem:
 - **MySQL**: Para gerenciamento do banco de dados.
 - **JavaScript (React)**: Para a construção da interface do usuário.
 
+## Como Instalar Dependencias e Executar o Projeto
+- Abra o terminal cmd e navegue com o comando ```cd upa-animal```
+- Executar o comando ```python -m venv venv``` para criar ambiente virtual
+- Ainda na pasta upa-animal executar o seguinte comando: ```pip install -r requirements.txt```
+- Para executar o ambiente virtual criado execute o caminho ```venv\Scripts\activate```
+
+
 ## Licença
 Este projeto está licenciado sob a MIT License - veja o arquivo [LICENSE](LICENSE) para mais detalhes.
